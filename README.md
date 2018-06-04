@@ -31,6 +31,6 @@ Optional libraries:
 - Google maps API: https://cloud.google.com/maps-platform/maps/
 - Hero library
 - Similar view controllers: Zara app, sleep cycle
-- Hardest part: Find friends at location, correct data structure for data
+- Hardest part: Find friends at location, correcte datastructuur for data, zoekfunctie
 
 
