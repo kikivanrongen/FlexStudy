@@ -21,4 +21,5 @@ MVP:
 
 Optional:
 - Connect with friends and see where your friends are studying
+- Filter op tijden
 
