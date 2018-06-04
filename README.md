@@ -24,3 +24,13 @@ Optional:
 - Connect with friends and see where your friends are studying
 - Filter op tijden
 
+Optional libraries:
+- Hero: view controller overgangen
+
+## Prerequisites
+- Google maps API: https://cloud.google.com/maps-platform/maps/
+- Hero library
+- Similar view controllers: Zara app, sleep cycle
+- Hardest part: Find friends at location, correct data structure for data
+
+
