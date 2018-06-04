@@ -2,8 +2,7 @@
 
 # Problem statement
 Students often come across the problem that they want to study in the university library, but don’t know if the place they want to go 
-to actually has available seats. Moreover, universities have many buildings suitable for studying. Hence, it would be nice for students
-to know where they could go. 
+to actually has available seats. Universities have many buildings suitable for studying, some of which students have never heard of. The spread of students over multiple study locations in Amsterdam can be better organised.
 
 # Solution
 The app ‘FlexStudy’ is a platform where students can check-in whenever they are at a seat in one of the university libraries.
