@@ -14,6 +14,7 @@ they check-out and the app will enable the seat for the next student.
 MVP:
 - Check-in function
 - Check-out function
+- Search location function
 - Available seats per location overview in Google Maps
 - Opening hours of every location
 - Additional requirements for entering (student id)
