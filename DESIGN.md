@@ -68,4 +68,4 @@
 
 ## Advanced sketch
 
-![alt text](https://github.com/kikivanrongen/FlexStudy/blob/master/doc/advanced%20sketch.pdf "Advanced Sketch")
+![alt text](https://github.com/kikivanrongen/FlexStudy/blob/master/doc/advanced%20sketch.png "Advanced Sketch")
