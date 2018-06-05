@@ -33,4 +33,4 @@ they check-out and the app will enable the seat for the next student.
 - Similar view controllers: Zara app, sleep cycle
 - Hardest part: Find friends at location, correct data structure, search and filter function
 
-![alt text](https://github.com/kikivanrongen/FlexStudy/blob/master/App%20overview.png "App overview")
+![alt text](https://github.com/kikivanrongen/FlexStudy/blob/master/doc/App%20overview.png "App overview")
