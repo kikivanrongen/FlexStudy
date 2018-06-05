@@ -65,3 +65,7 @@
 #### Variables
 #### Functions
 * updateUI(): set graph, set navigation title
+
+## Advanced sketch
+
+![alt text](https://github.com/kikivanrongen/FlexStudy/blob/master/doc/advanced%20sketch.pdf "Advanced Sketch")
