@@ -3,17 +3,17 @@
 ## Structs
 
 ### Struct location
-Name: String
-Total seats: Int
-Available seats: Int
-opening hours: String
-studentID: Bool
+* Name: String
+* Total seats: Int
+* Available seats: Int
+* opening hours: String
+* studentID: Bool
 
 ### Struct activity
-location: String
-duration: Double
-date: Date
-day: String
+* location: String
+* duration: Double
+* date: Date
+* day: String
 
 ## Classes
 
