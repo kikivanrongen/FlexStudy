@@ -11,7 +11,7 @@ a quick overview of the availability of study places in all the locations of the
 they check-out and the app will enable the seat for the next student. 
 
 ## Main features
-MVP:
+### MVP
 - Check-in function
 - Check-out function
 - Search location function
@@ -20,11 +20,11 @@ MVP:
 - Additional requirements for entering (student id)
 - Keep track of your study hours (graph/table) 
 
-Optional:
+### Optional
 - Connect with friends and see where your friends are studying
 - Filter at opening hours
 
-Optional libraries:
+### Optional libraries
 - Hero: view controller transitions
 
 ## Prerequisites
