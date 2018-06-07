@@ -12,3 +12,5 @@ voor bevestiging van uitchecken. Bij bevestigen wordt je naar de progress table 
 Firebase is geinstalleerd, maar wordt nog geen data in gezet of uitgehaald. 
 
 # day 4
+* database om aantal beschikbare studieplekken op te slaan en te modifien
+* database om studie progressie op te slaan als activiteiten
