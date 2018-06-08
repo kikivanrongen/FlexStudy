@@ -26,7 +26,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SfH-16-WC6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2405.5999999999999" y="760.56971514242889"/>
+            <point key="canvasLocation" x="2407" y="803"/>
         </scene>
         <!--GraphViewController-->
         <scene sceneID="3iI-Bi-SZg">
@@ -42,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaD-eQ-ugD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4262" y="761"/>
+            <point key="canvasLocation" x="4262" y="803"/>
         </scene>
         <!--ProgressTableViewController-->
         <scene sceneID="ugX-z1-glf">
@@ -53,13 +53,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProgressTableViewCell" id="h7g-sb-OH2" userLabel="ProgressTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ActivityCellIdentifier" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCellIdentifier" id="h7g-sb-OH2" customClass="ProgressViewCell" customModule="FlexStudy" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h7g-sb-OH2" id="f0r-qv-AR0">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dxd-iz-apK">
+                                            <rect key="frame" x="16" y="12" width="343" height="20.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Axa-34-X2b">
+                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="45" id="aIK-sB-cuh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYh-TU-3cL">
+                                                    <rect key="frame" x="55" y="0.0" width="233" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdE-zp-W7g">
+                                                    <rect key="frame" x="298" y="0.0" width="45" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="45" id="m2d-ZB-Kvo"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dxd-iz-apK" firstAttribute="leading" secondItem="f0r-qv-AR0" secondAttribute="leading" constant="16" id="G3r-1O-bqT"/>
+                                        <constraint firstAttribute="trailing" secondItem="dxd-iz-apK" secondAttribute="trailing" constant="16" id="TBZ-yo-a3U"/>
+                                        <constraint firstItem="dxd-iz-apK" firstAttribute="centerY" secondItem="f0r-qv-AR0" secondAttribute="centerY" id="fnc-p3-pY8"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLabel" destination="Axa-34-X2b" id="zgF-4s-liL"/>
+                                    <outlet property="durationLabel" destination="SdE-zp-W7g" id="iVy-hC-Hup"/>
+                                    <outlet property="locationLabel" destination="UYh-TU-3cL" id="CU6-GK-gfK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -71,7 +112,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRG-Fy-3pk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3369" y="761"/>
+            <point key="canvasLocation" x="3369" y="803"/>
         </scene>
         <!--Locaties-->
         <scene sceneID="PGa-zV-cXj">
@@ -270,6 +311,7 @@
                                                         <state key="normal" title="Bevestig"/>
                                                         <connections>
                                                             <action selector="confirmButtonPressed:" destination="OJf-gl-2Q4" eventType="primaryActionTriggered" id="CHS-od-hZU"/>
+                                                            <segue destination="yEg-lm-hnE" kind="show" identifier="ConfirmSegue" id="OoG-4u-TQG"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1de-ll-1Jy">
@@ -345,4 +387,7 @@
             <point key="canvasLocation" x="1466.4000000000001" y="417.8410794602699"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="OoG-4u-TQG"/>
+    </inferredMetricsTieBreakers>
 </document>

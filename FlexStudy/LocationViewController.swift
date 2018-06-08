@@ -4,7 +4,6 @@ import GoogleMaps
 class LocationViewController: UIViewController, GMSMapViewDelegate {
     
     // MARK: Outlets
-    @IBOutlet weak var filterButton: UIButton!
     
     // MARK: Actions
     
@@ -57,7 +56,6 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
     
     // GMSMapViewDelegate
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        print("you tapped at \(marker.title!)")
         
         // determine chosen location
         for location in locations {
@@ -79,6 +77,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
         if segue.identifier == "DetailSegue" {
             let detailViewController = segue.destination as! DetailViewController
             detailViewController.response = chosenLocation!
+            detailViewController.locations = locations
         }
     }
 

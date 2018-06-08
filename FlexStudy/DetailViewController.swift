@@ -1,4 +1,6 @@
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class DetailViewController: UIViewController {
     
@@ -47,6 +49,9 @@ class DetailViewController: UIViewController {
         popUpView.isHidden = true
         
         addActivity()
+        
+        // go to progress view controller
+        performSegue(withIdentifier: "ConfirmSegue", sender: nil)
     }
     
     // return to info screen
@@ -58,9 +63,23 @@ class DetailViewController: UIViewController {
     
     var response: Location!
     var dateComponents = DateComponents()
-    var activities: [Activity] = []
+    var activities = [Activity]()
     var starttime: Date?
     var elapsed: TimeInterval = 0
+    var locations: [Location]!
+    
+    var ref: DatabaseReference! = Database.database().reference()
+    
+    func storeLocationData() {
+        for i in 0...(locations.count - 1) {
+            
+            // create Firebase reference for locations
+            let locationStorage = ["name": locations[i].name, "available": String(locations[i].availableSeats),
+            "total": String(locations[i].totalSeats)]
+            
+            self.ref.child("location").child(String(i)).setValue(locationStorage)
+        }
+    }
     
     // MARK: Functions
     
@@ -68,12 +87,13 @@ class DetailViewController: UIViewController {
     func addActivity() {
     
         let calendar = Calendar.current
-        var day = calendar.component(.day, from: starttime!)
-        var month = calendar.component(.month, from: starttime!)
+        let day = calendar.component(.day, from: starttime!)
+        let month = calendar.component(.month, from: starttime!)
         
-        var newActivity = Activity(location: response.name, duration: elapsed , date: "\(day)/\(month)")
+        let newActivity = Activity(location: response.name, duration: elapsed , date: "\(day)/\(month)")
         
         activities.append(newActivity)
+
     }
     
     // configure start screen
@@ -99,10 +119,20 @@ class DetailViewController: UIViewController {
         checkoutButton.isEnabled = true
         popUpView.isHidden = true
     }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ConfirmSegue" {
+            let progressTableViewController = segue.destination as! ProgressTableViewController
+            progressTableViewController.progress = activities
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        storeLocationData()
         // Do any additional setup after loading the view.
     }
 
