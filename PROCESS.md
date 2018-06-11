@@ -12,3 +12,6 @@ voor bevestiging van uitchecken. Bij bevestigen wordt je naar de progress table 
 
 # day 4
 App communiceert met firebase en past gegevens aan. 
+
+# day 5
+Anoniem inloggen, studieactiviteiten static var van gemaakt. Activiteiten opslaan in firebase. Tableview laat nu alle activiteiten zien
