@@ -1,6 +1,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 class DetailViewController: UIViewController {
     
@@ -22,15 +23,17 @@ class DetailViewController: UIViewController {
     
     // MARK: Actions
     
-    // start activity, update variables and disable check in button
+    // start activity
     @IBAction func checkinButtonPressed(_ sender: UIButton) {
         checkinButton.isEnabled = false
         checkinButton.backgroundColor = UIColor.lightGray
         
         starttime = Date()
         
+        // update available seats in firebase and label
         response.availableSeats -= 1
         availableSeatsLabel.text = String(response.availableSeats)
+        updateAvailableSeats()
     }
     
     // ask for confirmation
@@ -38,20 +41,25 @@ class DetailViewController: UIViewController {
         popUpView.isHidden = false
     }
     
-    // update variables, close pop up and store activity
+    // end activity: update variables and store data
     @IBAction func confirmButtonPressed(_ sender: UIButton) {
         checkoutButton.isEnabled = false
         checkinButton.isEnabled = true
         checkoutButton.backgroundColor = UIColor.lightGray
         
         elapsed = Date().timeIntervalSince(starttime!)
+        elapsedHours = Double(elapsed) / 60
         
+        // update available seats
+        response.availableSeats += 1
+        updateAvailableSeats()
+        
+        // close pop-up
         popUpView.isHidden = true
         
+        // store study activity
         addActivity()
         
-        // go to progress view controller
-        performSegue(withIdentifier: "ConfirmSegue", sender: nil)
     }
     
     // return to info screen
@@ -63,13 +71,28 @@ class DetailViewController: UIViewController {
     
     var response: Location!
     var dateComponents = DateComponents()
-    var activities = [Activity]()
     var starttime: Date?
     var elapsed: TimeInterval = 0
+    var elapsedHours: Double = 0
     var locations: [Location]!
     
     var ref: DatabaseReference! = Database.database().reference()
     
+    // MARK: Functions
+    
+    func signIn() {
+        
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            return authResult
+        }
+        
+        let user = authResult.user
+        let isAnonymous = user.isAnonymous  // true
+        let uid = user.uid
+        print("user logged in with uid: " + user.uid)
+    }
+
+    // store location data in firebase
     func storeLocationData() {
         for i in 0...(locations.count - 1) {
             
@@ -81,8 +104,6 @@ class DetailViewController: UIViewController {
         }
     }
     
-    // MARK: Functions
-    
     // store activity in list when check-out button is pressed
     func addActivity() {
     
@@ -90,9 +111,11 @@ class DetailViewController: UIViewController {
         let day = calendar.component(.day, from: starttime!)
         let month = calendar.component(.month, from: starttime!)
         
-        let newActivity = Activity(location: response.name, duration: elapsed , date: "\(day)/\(month)")
+        let newActivity = Activity(location: response.name, duration: elapsedHours , date: "\(day)/\(month)")
         
-        activities.append(newActivity)
+        Activity.activities.append(newActivity)
+        
+//        self.ref.child("users").childByAutoId().child("study activities").setValue()
 
     }
     
@@ -120,19 +143,32 @@ class DetailViewController: UIViewController {
         popUpView.isHidden = true
     }
     
+    func updateAvailableSeats() -> Void {
+        
+        var handle: DatabaseHandle?
+        
+        // get reference
+        for i in 0...(locations.count - 1){
+            
+            handle = ref.child("location").child(String(i)).child("name").observe(.value, with: { (snapshot) in
+                
+                let value = snapshot.value as? String
+                
+                if let actualValue = value {
+                    if actualValue == self.response.name {
+                        self.ref.child("location").child(String(i)).updateChildValues(["available": self.response.availableSeats])
+                    }
+                }
+            })
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ConfirmSegue" {
-            let progressTableViewController = segue.destination as! ProgressTableViewController
-            progressTableViewController.progress = activities
         }
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        storeLocationData()
+//        storeLocationData()
         // Do any additional setup after loading the view.
     }
 

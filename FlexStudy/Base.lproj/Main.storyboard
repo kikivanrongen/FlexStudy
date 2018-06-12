@@ -311,7 +311,6 @@
                                                         <state key="normal" title="Bevestig"/>
                                                         <connections>
                                                             <action selector="confirmButtonPressed:" destination="OJf-gl-2Q4" eventType="primaryActionTriggered" id="CHS-od-hZU"/>
-                                                            <segue destination="yEg-lm-hnE" kind="show" identifier="ConfirmSegue" id="OoG-4u-TQG"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1de-ll-1Jy">
@@ -387,7 +386,4 @@
             <point key="canvasLocation" x="1466.4000000000001" y="417.8410794602699"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="OoG-4u-TQG"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -5,4 +5,8 @@ struct Activity {
     var location: String
     var duration: Double
     var date: String
+
+    static var activities = [Activity]()
 }
+
+
