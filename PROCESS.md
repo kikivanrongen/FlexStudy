@@ -15,3 +15,6 @@ App communiceert met firebase en past gegevens aan.
 
 # day 5
 Anoniem inloggen, studieactiviteiten static var van gemaakt. Activiteiten opslaan in firebase. Tableview laat nu alle activiteiten zien
+
+# day 6
+FB login pagen maken. 
