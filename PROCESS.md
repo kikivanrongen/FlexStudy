@@ -15,3 +15,6 @@ App communiceert met firebase en past gegevens aan.
 
 # day 5
 Anoniem inloggen, studieactiviteiten static var van gemaakt. Activiteiten opslaan in firebase. Tableview laat nu alle activiteiten zien
+
+# day 6
+FB login pagina is aangemaakt. Users worden in firebase gezet. Morgen users in realtime database zetten met studieactiviteiten. Ook zorgen dat dit niet dubbelop gebeurt. Check of er al een valide acces token van fb is, voordat je een nieuwe maakt? 
