@@ -83,13 +83,15 @@ class DetailViewController: UIViewController {
     func signIn() {
         
         Auth.auth().signInAnonymously() { (authResult, error) in
-            return authResult
+            if let error = error {
+                return
+            }
         }
+
+//        let user = authResult.user
+//        let isAnonymous = user.isAnonymous  // true
+//        let uid = user.uid
         
-        let user = authResult.user
-        let isAnonymous = user.isAnonymous  // true
-        let uid = user.uid
-        print("user logged in with uid: " + user.uid)
     }
 
     // store location data in firebase

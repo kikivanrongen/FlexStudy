@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		059FE46A66B92117156ADDDC /* Pods_FlexStudyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC183541AEDB38F911E145B0 /* Pods_FlexStudyTests.framework */; };
+		2700BC6920CFC75700452E15 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700BC6820CFC75700452E15 /* LogInViewController.swift */; };
 		27240B7720C6B3E8006BE35E /* ProgressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27240B7620C6B3E8006BE35E /* ProgressTableViewController.swift */; };
 		27240B7920C6B411006BE35E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27240B7820C6B411006BE35E /* DetailViewController.swift */; };
 		27240B7B20C6B422006BE35E /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27240B7A20C6B422006BE35E /* LocationViewController.swift */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		0270F10787085A0273C6BF10 /* Pods-FlexStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlexStudy.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlexStudy/Pods-FlexStudy.release.xcconfig"; sourceTree = "<group>"; };
 		255B9C289B6108B3E2E147EA /* Pods-FlexStudyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlexStudyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlexStudyUITests/Pods-FlexStudyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		2700BC6820CFC75700452E15 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		2700BC6A20CFE33D00452E15 /* FlexStudy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlexStudy.entitlements; sourceTree = "<group>"; };
 		27240B7620C6B3E8006BE35E /* ProgressTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableViewController.swift; sourceTree = "<group>"; };
 		27240B7820C6B411006BE35E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		27240B7A20C6B422006BE35E /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -124,8 +127,10 @@
 		27BB995520C53577008252F1 /* FlexStudy */ = {
 			isa = PBXGroup;
 			children = (
+				2700BC6A20CFE33D00452E15 /* FlexStudy.entitlements */,
 				27BB995620C53577008252F1 /* AppDelegate.swift */,
 				27BB995A20C53577008252F1 /* Main.storyboard */,
+				2700BC6820CFC75700452E15 /* LogInViewController.swift */,
 				27240B7620C6B3E8006BE35E /* ProgressTableViewController.swift */,
 				27240B7820C6B411006BE35E /* DetailViewController.swift */,
 				27240B7A20C6B422006BE35E /* LocationViewController.swift */,
@@ -253,6 +258,11 @@
 				TargetAttributes = {
 					27BB995220C53577008252F1 = {
 						CreatedOnToolsVersion = 9.3;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					27BB996620C5357B008252F1 = {
 						CreatedOnToolsVersion = 9.3;
@@ -392,6 +402,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FlexStudy/Pods-FlexStudy-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -399,6 +413,10 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -419,6 +437,7 @@
 				27240B7B20C6B422006BE35E /* LocationViewController.swift in Sources */,
 				27240B7D20C6B752006BE35E /* Activity.swift in Sources */,
 				27BB995720C53577008252F1 /* AppDelegate.swift in Sources */,
+				2700BC6920CFC75700452E15 /* LogInViewController.swift in Sources */,
 				27240B7F20C6BA6A006BE35E /* Location.swift in Sources */,
 				27240B7720C6B3E8006BE35E /* ProgressTableViewController.swift in Sources */,
 				27240B7920C6B411006BE35E /* DetailViewController.swift in Sources */,
@@ -595,7 +614,9 @@
 			baseConfigurationReference = A9700581744E364072DDFE4F /* Pods-FlexStudy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FlexStudy/FlexStudy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WY26NAD38W;
 				INFOPLIST_FILE = FlexStudy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -613,7 +634,9 @@
 			baseConfigurationReference = 0270F10787085A0273C6BF10 /* Pods-FlexStudy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FlexStudy/FlexStudy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WY26NAD38W;
 				INFOPLIST_FILE = FlexStudy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
