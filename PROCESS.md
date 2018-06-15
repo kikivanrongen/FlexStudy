@@ -18,3 +18,6 @@ Anoniem inloggen, studieactiviteiten static var van gemaakt. Activiteiten opslaa
 
 # day 6
 FB login pagina is aangemaakt. Users worden in firebase gezet. Morgen users in realtime database zetten met studieactiviteiten. Ook zorgen dat dit niet dubbelop gebeurt. Check of er al een valide acces token van fb is, voordat je een nieuwe maakt? 
+
+# day 8
+users worden nu met correcte uid opgeslagen in de database. Studieactiviteiten worden hieronder gehangen. Ik ben nu bezig met een handige manier bedenken om activiteiten te verwijderen en toe te voegen. Hoe kan ik via al m'n view controllers bij m'n firebase database reference komen. Morgen moet ik zorgen dat alle data die gepresenteerd wordt uit firebase wordt gehaald en niet uit een lokale variabele (static var).  
