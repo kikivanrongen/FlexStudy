@@ -38,33 +38,31 @@ class DetailViewController: UIViewController {
     
     // ask for confirmation
     @IBAction func checkoutButtonPressed(_ sender: UIButton) {
-        popUpView.isHidden = false
-    }
-    
-    // end activity: update variables and store data
-    @IBAction func confirmButtonPressed(_ sender: UIButton) {
-        checkoutButton.isEnabled = false
-        checkinButton.isEnabled = true
-        checkoutButton.backgroundColor = UIColor.lightGray
         
-        elapsed = Date().timeIntervalSince(starttime!)
-        elapsedHours = Double(elapsed) / 60
+        // alert for end activity: update variables and store data
+        let alert = UIAlertController(title: "Bevestig check-out", message: "Wil je je studie activiteit beëindigen?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { action in
+            
+            self.checkoutButton.isEnabled = false
+            self.checkinButton.isEnabled = true
+            self.checkoutButton.backgroundColor = UIColor.lightGray
+            self.checkinButton.backgroundColor = UIColor.blue
+            
+            self.elapsed = Date().timeIntervalSince(self.starttime!)
+            self.elapsedHours = Double(self.elapsed) / 60
+            
+            // update available seats
+            self.response.availableSeats += 1
+            self.updateAvailableSeats()
+            
+            // store study activity
+//            self.addActivity()
+            
+        }))
+            
+        alert.addAction(UIAlertAction(title: "Terug", style: UIAlertActionStyle.cancel, handler: nil))
         
-        // update available seats
-        response.availableSeats += 1
-        updateAvailableSeats()
-        
-        // close pop-up
-        popUpView.isHidden = true
-        
-        // store study activity
-        addActivity()
-        
-    }
-    
-    // return to info screen
-    @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        popUpView.isHidden = true
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: Variables
@@ -79,20 +77,6 @@ class DetailViewController: UIViewController {
     var ref: DatabaseReference! = Database.database().reference()
     
     // MARK: Functions
-    
-    func signIn() {
-        
-        Auth.auth().signInAnonymously() { (authResult, error) in
-            if let error = error {
-                return
-            }
-        }
-
-//        let user = authResult.user
-//        let isAnonymous = user.isAnonymous  // true
-//        let uid = user.uid
-        
-    }
 
     // store location data in firebase
     func storeLocationData() {
@@ -106,18 +90,28 @@ class DetailViewController: UIViewController {
         }
     }
     
-    // store activity in list when check-out button is pressed
+    // store activity with properties
     func addActivity() {
-    
+
         let calendar = Calendar.current
         let day = calendar.component(.day, from: starttime!)
         let month = calendar.component(.month, from: starttime!)
+
+        // create activity node
+        let uid = Auth.auth().currentUser!.uid
+        ref.child("users").child(uid).childByAutoId().setValue(["location": response.name, "duration": elapsedHours, "date": "\(day)/\(month)"])
         
-        let newActivity = Activity(location: response.name, duration: elapsedHours , date: "\(day)/\(month)")
+    }
+    
+    // retrieve data of study activities of current user
+    func fetchActivityData() {
+        let uid = Auth.auth().currentUser!.uid
         
-        Activity.activities.append(newActivity)
-        
-//        self.ref.child("users").childByAutoId().child("study activities").setValue()
+        ref.child("users").child(uid).observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String:AnyObject] {
+                print(dictionary)
+            }
+        }, withCancel: nil)
 
     }
     
@@ -142,7 +136,9 @@ class DetailViewController: UIViewController {
         
         checkinButton.isEnabled = true
         checkoutButton.isEnabled = true
-        popUpView.isHidden = true
+        checkinButton.backgroundColor = UIColor.blue
+        checkoutButton.backgroundColor = UIColor.blue
+
     }
     
     func updateAvailableSeats() -> Void {
@@ -171,12 +167,10 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
 //        storeLocationData()
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }

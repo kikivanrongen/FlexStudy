@@ -1,11 +1,19 @@
 import UIKit
 import FBSDKLoginKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
-
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // check if user is already logged in
+        let uid = Auth.auth().currentUser?.uid
+        if uid != nil {
+            // go to location view controller
+            self.performSegue(withIdentifier: "logInSegue", sender: self)
+        }
         
         // get fb login button
         let loginButton = FBSDKLoginButton()
@@ -65,9 +73,9 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             // go to location view controller
             self.performSegue(withIdentifier: "logInSegue", sender: self)
+            
         })
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -22,7 +22,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
         Location(name: "Cedla", address: "Roetersstraat 33", lat: 52.362216, long: 4.911436, openingHours: "10:00 - 17:00", totalSeats: 20, availableSeats: 20, studentId: false),
         Location(name: "Juridische Bibliotheek", address: "Nieuwe Achtergracht 166", lat: 52.362957, long: 4.912404, openingHours: "09:00 - 21:00", totalSeats: 126, availableSeats: 0, studentId: false),
         Location(name: "Learning Space A0/BC1/A1", address: "Nieuwe Achtergracht 166", lat: 52.362816, long: 4.912702, openingHours: "08:00 - 22:00", totalSeats: 811, availableSeats: 811, studentId: false),
-        Location(name: "Science Park", address: "Science Park 904", lat: 52.355312, long: 4.954016, openingHours: "08:00 - 22:00", totalSeats: 543, availableSeats: 0, studentId: false),
+        Location(name: "Science Park", address: "Science Park 904", lat: 52.355312, long: 4.954016, openingHours: "08:00 - 22:00", totalSeats: 543, availableSeats: 543, studentId: false),
         Location(name: "Medische Bibliotheek AMC", address: "Meibergdreef 9", lat: 52.294767, long: 4.957973, openingHours: "08:30 - 21:45", totalSeats: 294, availableSeats: 294, studentId: false),
         Location(name: "Tandheelkunde (ACTA)", address: "Gustav Mahlerlaan 3004", lat: 52.336300, long: 4.861460, openingHours: "08:30 - 17:00", totalSeats: 25, availableSeats: 25, studentId: false)
         
@@ -34,7 +34,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
     func updateUI() {
         
         // create camera position and mapview
-        let camera = GMSCameraPosition.camera(withLatitude: 52.367734, longitude: 4.889741, zoom: 14)
+        let camera = GMSCameraPosition.camera(withLatitude: 52.365766, longitude: 4.902576, zoom: 14)
         let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
         
         // set view
