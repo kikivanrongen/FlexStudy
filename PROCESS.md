@@ -21,3 +21,9 @@ FB login pagina is aangemaakt. Users worden in firebase gezet. Morgen users in r
 
 # day 8
 users worden nu met correcte uid opgeslagen in de database. Studieactiviteiten worden hieronder gehangen. Ik ben nu bezig met een handige manier bedenken om activiteiten te verwijderen en toe te voegen. Hoe kan ik via al m'n view controllers bij m'n firebase database reference komen. Morgen moet ik zorgen dat alle data die gepresenteerd wordt uit firebase wordt gehaald en niet uit een lokale variabele (static var).  
+
+# day 9
+delete functionaliteit toegevoegd. Werkt nu goed met table view en firebase.
+
+# day 10
+Extra variabele aan struct activity aangemaakt (key) waardoor het nu gemakkelijker zoeken is in firebase naar een activiteit. Functies hiernaar aangepast. Ook een xtra viewcontroller gemaakt waarin mbv een search bar vrienden gezocht kunnen worden (op email adres). Morgen: add activity als functie al aanroepen bij check-in van een activiteit. Op deze manier kan je vrienden zoeken op het moment waar ze dan zijn ingecheckd. Op het mometn van checkout kan je de duration dan vastleggen en de node updaten in firebase --> Kijk of hierdoor de observe events nog kloppen. Misschien niet meer .childAdded, maar .childChanged!
