@@ -20,7 +20,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
         Location(name: "Bushuis", address: "Kloveniersburgwal 48", lat: 52.370870, long: 4.898021, openingHours: "08:00 - 20:00", totalSeats: 50, availableSeats: 50, studentId: false),
         Location(name: "Library Learning Centre Roeterseilandcampus", address: "Roetersstraat 11", lat: 52.363580, long: 4.910951, openingHours: "08:30 - 22:00", totalSeats: 757, availableSeats: 757, studentId: true),
         Location(name: "Cedla", address: "Roetersstraat 33", lat: 52.362216, long: 4.911436, openingHours: "10:00 - 17:00", totalSeats: 20, availableSeats: 20, studentId: false),
-        Location(name: "Juridische Bibliotheek", address: "Nieuwe Achtergracht 166", lat: 52.362957, long: 4.912404, openingHours: "09:00 - 21:00", totalSeats: 126, availableSeats: 0, studentId: false),
+        Location(name: "Juridische Bibliotheek", address: "Nieuwe Achtergracht 166", lat: 52.362957, long: 4.912404, openingHours: "09:00 - 21:00", totalSeats: 126, availableSeats: 126, studentId: false),
         Location(name: "Learning Space A0/BC1/A1", address: "Nieuwe Achtergracht 166", lat: 52.362816, long: 4.912702, openingHours: "08:00 - 22:00", totalSeats: 811, availableSeats: 811, studentId: false),
         Location(name: "Science Park", address: "Science Park 904", lat: 52.355312, long: 4.954016, openingHours: "08:00 - 22:00", totalSeats: 543, availableSeats: 543, studentId: false),
         Location(name: "Medische Bibliotheek AMC", address: "Meibergdreef 9", lat: 52.294767, long: 4.957973, openingHours: "08:30 - 21:45", totalSeats: 294, availableSeats: 294, studentId: false),

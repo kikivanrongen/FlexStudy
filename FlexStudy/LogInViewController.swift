@@ -5,15 +5,13 @@ import FirebaseDatabase
 
 class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
  
+    var ref: DatabaseReference!
+    var mailStorage: [String:String] = [:]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // check if user is already logged in
-        let uid = Auth.auth().currentUser?.uid
-        if uid != nil {
-            // go to location view controller
-            self.performSegue(withIdentifier: "logInSegue", sender: self)
-        }
+        ref = Database.database().reference()
         
         // get fb login button
         let loginButton = FBSDKLoginButton()
@@ -25,6 +23,15 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         // create acces to email addresses
         loginButton.readPermissions = ["email", "public_profile"]
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // check if user is already logged in
+        if let _ = Auth.auth().currentUser {
+            self.performSegue(withIdentifier: "logInSegue", sender: self)
+        }
     }
     
     // log out of facebook
@@ -61,7 +68,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         // store user in firebase
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         
-        
         // ensure authentication for logging in
         Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
             if error != nil {
@@ -71,10 +77,19 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             
             print("succesfully logged in the user: ", user ?? "")
             
+            // get email and user id from logged in user
+            let email = Auth.auth().currentUser?.email
+            let uid = Auth.auth().currentUser?.uid
+            
+            // store in seperate node in firebase
+            self.mailStorage = [uid!:email!]
+            self.ref.child("email addresses").setValue(self.mailStorage)
+            
             // go to location view controller
             self.performSegue(withIdentifier: "logInSegue", sender: self)
             
         })
+
     }
 
     override func didReceiveMemoryWarning() {

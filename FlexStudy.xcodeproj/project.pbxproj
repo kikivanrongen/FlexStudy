@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		059FE46A66B92117156ADDDC /* Pods_FlexStudyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC183541AEDB38F911E145B0 /* Pods_FlexStudyTests.framework */; };
 		2700BC6920CFC75700452E15 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2700BC6820CFC75700452E15 /* LogInViewController.swift */; };
+		2721C39620D9019D00F83649 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2721C39520D9019D00F83649 /* FriendsViewController.swift */; };
 		27240B7720C6B3E8006BE35E /* ProgressTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27240B7620C6B3E8006BE35E /* ProgressTableViewController.swift */; };
 		27240B7920C6B411006BE35E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27240B7820C6B411006BE35E /* DetailViewController.swift */; };
 		27240B7B20C6B422006BE35E /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27240B7A20C6B422006BE35E /* LocationViewController.swift */; };
@@ -47,6 +48,7 @@
 		255B9C289B6108B3E2E147EA /* Pods-FlexStudyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlexStudyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlexStudyUITests/Pods-FlexStudyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2700BC6820CFC75700452E15 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		2700BC6A20CFE33D00452E15 /* FlexStudy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlexStudy.entitlements; sourceTree = "<group>"; };
+		2721C39520D9019D00F83649 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		27240B7620C6B3E8006BE35E /* ProgressTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableViewController.swift; sourceTree = "<group>"; };
 		27240B7820C6B411006BE35E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		27240B7A20C6B422006BE35E /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				2700BC6A20CFE33D00452E15 /* FlexStudy.entitlements */,
 				27BB995620C53577008252F1 /* AppDelegate.swift */,
 				27BB995A20C53577008252F1 /* Main.storyboard */,
+				2721C39520D9019D00F83649 /* FriendsViewController.swift */,
 				2700BC6820CFC75700452E15 /* LogInViewController.swift */,
 				27240B7620C6B3E8006BE35E /* ProgressTableViewController.swift */,
 				27240B7820C6B411006BE35E /* DetailViewController.swift */,
@@ -434,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2721C39620D9019D00F83649 /* FriendsViewController.swift in Sources */,
 				27240B7B20C6B422006BE35E /* LocationViewController.swift in Sources */,
 				27240B7D20C6B752006BE35E /* Activity.swift in Sources */,
 				27BB995720C53577008252F1 /* AppDelegate.swift in Sources */,

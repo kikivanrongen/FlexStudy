@@ -28,21 +28,38 @@
             </objects>
             <point key="canvasLocation" x="2407" y="803"/>
         </scene>
-        <!--GraphViewController-->
+        <!--FriendsViewController-->
         <scene sceneID="3iI-Bi-SZg">
             <objects>
-                <viewController id="6Bv-dL-qCh" userLabel="GraphViewController" sceneMemberID="viewController">
+                <viewController title="FriendsViewController" id="6Bv-dL-qCh" customClass="FriendsViewController" customModule="FlexStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NcZ-Ug-E8J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="E-mail address" translatesAutoresizingMaskIntoConstraints="NO" id="XSc-8o-IEW">
+                                <rect key="frame" x="0.0" y="116" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="6Bv-dL-qCh" id="cRI-5c-gyR"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XSc-8o-IEW" firstAttribute="top" secondItem="a5x-AG-hna" secondAttribute="top" id="IB5-Q3-4a9"/>
+                            <constraint firstItem="XSc-8o-IEW" firstAttribute="leading" secondItem="a5x-AG-hna" secondAttribute="leading" id="Osl-hn-7Ge"/>
+                            <constraint firstItem="XSc-8o-IEW" firstAttribute="trailing" secondItem="a5x-AG-hna" secondAttribute="trailing" id="vYl-pc-pvo"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="a5x-AG-hna"/>
                     </view>
-                    <navigationItem key="navigationItem" id="a6i-r7-VMw"/>
+                    <navigationItem key="navigationItem" title="Find friends" id="5Wa-hg-fBL"/>
+                    <connections>
+                        <outlet property="searchFriends" destination="XSc-8o-IEW" id="FJ2-ak-hQb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jaD-eQ-ugD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4262" y="803"/>
+            <point key="canvasLocation" x="4261.6000000000004" y="802.848575712144"/>
         </scene>
         <!--ProgressTableViewController-->
         <scene sceneID="ugX-z1-glf">
@@ -108,7 +125,16 @@
                             <outlet property="delegate" destination="yEg-lm-hnE" id="cvO-io-TaK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Progressie" id="QpN-pG-r5O"/>
+                    <navigationItem key="navigationItem" title="Progressie" id="QpN-pG-r5O">
+                        <barButtonItem key="rightBarButtonItem" title="Find friends" id="ZkI-RS-4L3">
+                            <connections>
+                                <action selector="findFriendButtonTapped:" destination="yEg-lm-hnE" id="Eza-Tg-hXK"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="6Bv-dL-qCh" kind="show" identifier="friendsSegue" id="WhH-ql-tfD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRG-Fy-3pk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -16,11 +16,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var checkinButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
     
-    @IBOutlet weak var popUpView: UIView!
-    @IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var popUpLabel: UILabel!
-    
     // MARK: Actions
     
     // start activity
@@ -53,10 +48,11 @@ class DetailViewController: UIViewController {
             
             // update available seats
             self.response.availableSeats += 1
+            self.availableSeatsLabel.text = String(self.response.availableSeats)
             self.updateAvailableSeats()
             
             // store study activity
-//            self.addActivity()
+            self.addActivity()
             
         }))
             
@@ -74,10 +70,36 @@ class DetailViewController: UIViewController {
     var elapsedHours: Double = 0
     var locations: [Location]!
     
+    // get instance of progress view controller
+//    let viewController = ProgressTableViewController()
+//    viewController.fetchAutoIds()
+    
+    // store autoIds in dictionary
+    var autoIds: [String:String] = [:]
+    var idStorage: [String:String] = [:]
+    
+    // get current logged in user
+    let uid = Auth.auth().currentUser!.uid
+    
     var ref: DatabaseReference! = Database.database().reference()
     
     // MARK: Functions
 
+    // store autoIds in local variable
+//    func fetchAutoIds() {
+//
+//        ref.child("id's").observe(.childAdded, with: { (snapshot) in
+//            if let dict = snapshot.value as? [String:String] {
+//                for (key, value) in dict {
+//                    print("key: \(key)")
+//                    print("value: \(value)")
+//                    self.autoIds[key] = value
+//                    print(self.autoIds)
+//                }
+//            }
+//        }, withCancel: nil)
+//    }
+    
     // store location data in firebase
     func storeLocationData() {
         for i in 0...(locations.count - 1) {
@@ -97,23 +119,29 @@ class DetailViewController: UIViewController {
         let day = calendar.component(.day, from: starttime!)
         let month = calendar.component(.month, from: starttime!)
 
-        // create activity node
-        let uid = Auth.auth().currentUser!.uid
-        ref.child("users").child(uid).childByAutoId().setValue(["location": response.name, "duration": elapsedHours, "date": "\(day)/\(month)"])
+        // get autoID
+        let reference = ref.child("users").child(uid).childByAutoId()
         
+        // create activity node
+        ref.child("users").child(uid).child(reference.key).setValue(["location": response.name, "duration": elapsedHours, "date": "\(day)/\(month)", "key": reference.key])
+        
+//        // store autoIds and uid
+//        let idStorage = [reference.key: uid]
+//        ref.child("id's").setValue(idStorage)
     }
     
-    // retrieve data of study activities of current user
-    func fetchActivityData() {
-        let uid = Auth.auth().currentUser!.uid
-        
-        ref.child("users").child(uid).observe(.childAdded, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String:AnyObject] {
-                print(dictionary)
-            }
-        }, withCancel: nil)
-
-    }
+    // retrieve data of study activities of current user --- waarschijnlijk niet nodig --> check dadelijk
+//    func fetchActivityData() {
+//
+//        // observe events for added activity
+//        ref.child("users").child(uid).observe(.childAdded, with: { (snapshot) in
+//            if let dictionary = snapshot.value as? [String:AnyObject] {
+//                print(dictionary)
+//                // DO ADDITIONAL FEATURES
+//            }
+//        }, withCancel: nil)
+//
+//    }
     
     // configure start screen
     func updateUI() {
@@ -166,6 +194,16 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+//        fetchAutoIds()
+        
+        // check if there are seats available
+        if response.availableSeats == 0 {
+            checkinButton.isEnabled = false
+            checkoutButton.isEnabled = false
+        }
+        
+        // store UBA locations in firebase
+        // uncomment this block the first time you are running this program
 //        storeLocationData()
     }
 
