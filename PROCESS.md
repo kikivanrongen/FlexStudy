@@ -26,4 +26,7 @@ users worden nu met correcte uid opgeslagen in de database. Studieactiviteiten w
 delete functionaliteit toegevoegd. Werkt nu goed met table view en firebase.
 
 # day 10
-Extra variabele aan struct activity aangemaakt (key) waardoor het nu gemakkelijker zoeken is in firebase naar een activiteit. Functies hiernaar aangepast. Ook een xtra viewcontroller gemaakt waarin mbv een search bar vrienden gezocht kunnen worden (op email adres). Morgen: add activity als functie al aanroepen bij check-in van een activiteit. Op deze manier kan je vrienden zoeken op het moment waar ze dan zijn ingecheckd. Op het mometn van checkout kan je de duration dan vastleggen en de node updaten in firebase --> Kijk of hierdoor de observe events nog kloppen. Misschien niet meer .childAdded, maar .childChanged!
+Extra variabele aan struct activity aangemaakt (key) waardoor het nu gemakkelijker zoeken is in firebase naar een activiteit. Functies hiernaar aangepast. Ook een extra viewcontroller gemaakt waarin mbv een search bar vrienden gezocht kunnen worden (op email adres). Morgen: add activity als functie al aanroepen bij check-in van een activiteit. Op deze manier kan je vrienden zoeken op het moment waar ze dan zijn ingecheckd. Op het moment van checkout kan je de duration dan vastleggen en de node updaten in firebase --> Kijk of hierdoor de observe events nog kloppen. Misschien niet meer .childAdded, maar .childChanged!
+
+# day 11
+Inderdaad observer voor childChanged moeten toevoegen. Progress table view geeft nu ook de activiteit weer op het moment dat deze nog niet is afgerond. Al wat animaties gemaakt voor buttons (pulse) en ga morgen verder met lay-out animaties.
