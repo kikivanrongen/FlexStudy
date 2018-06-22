@@ -20,39 +20,119 @@ class DetailViewController: UIViewController {
     
     // start activity
     @IBAction func checkinButtonPressed(_ sender: UIButton) {
-        checkinButton.isEnabled = false
-        checkinButton.backgroundColor = UIColor.lightGray
         
-        starttime = Date()
+        // pulse animation
+        sender.pulsate()
         
-        // update available seats in firebase and label
-        response.availableSeats -= 1
-        availableSeatsLabel.text = String(response.availableSeats)
-        updateAvailableSeats()
+        updateButtons()
+        
+        // set start time
+        let starttime = Date()
+        
+        // update available seats
+//        self.response.availableSeats -=1
+        
+        var index = 0
+        for i in 0...(self.locations.count - 1){
+            if self.locations[i].name == self.response.name {
+                index = i
+                //                    self.ref.child("location").child(String(i)).updateChildValues(["available":self.response.availableSeats])
+            }
+        }
+        
+        self.ref.child("location").child(String(index)).runTransactionBlock({ (data) -> TransactionResult in
+            if var location = data.value as? [String:AnyObject] {
+                var seats = location["available"] as? Int
+                seats! -= 1
+                location["available"] = seats as AnyObject
+                data.value = location
+                return TransactionResult.success(withValue: data)
+            }
+            return TransactionResult.success(withValue: data)
+        })
+        
+        // update list of availability
+        // self.updateAvailableSeats()
+        
+        // determine seats for current location and set label
+//        let seats = self.available[self.response.name]
+//        self.availableSeatsLabel.text = seats
+        
+        // store activity in database
+        addActivity(start: starttime)
     }
     
     // ask for confirmation
     @IBAction func checkoutButtonPressed(_ sender: UIButton) {
         
+        // pulse animation
+        sender.pulsate()
+        
         // alert for end activity: update variables and store data
         let alert = UIAlertController(title: "Bevestig check-out", message: "Wil je je studie activiteit beëindigen?", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { action in
             
-            self.checkoutButton.isEnabled = false
-            self.checkinButton.isEnabled = true
-            self.checkoutButton.backgroundColor = UIColor.lightGray
-            self.checkinButton.backgroundColor = UIColor.blue
+            // get key of ended activity and retrieve starttime when completed
+            self.ref.child("users").child(self.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                var key: String?
+                
+                // iterate over childs (activities of the user)
+                for child in snapshot.children {
+                    
+                    let child = (child as! DataSnapshot).value as! [String:AnyObject]
+                    
+                    // store key in variable if location and duration matches requirements
+                    if child["location"] as? String == self.response.name && child["duration"] as? String == " " {
+                        key = child["key"] as? String
+                        break
+                    }
+                }
+                
+                // retrieve starttime from chosen activity to be ended
+                self.ref.child("users").child(self.uid).child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let dictionary = snapshot.value as? [String:AnyObject] {
+                        
+                        // determine endtime
+                        let starttime = dictionary["starttime"] as? String
+                        self.setEndtime(start: starttime!, key: key!)
+                        
+                    }
+                }, withCancel: nil)
+                
+            }, withCancel: nil)
             
-            self.elapsed = Date().timeIntervalSince(self.starttime!)
-            self.elapsedHours = Double(self.elapsed) / 60
             
             // update available seats
-            self.response.availableSeats += 1
-            self.availableSeatsLabel.text = String(self.response.availableSeats)
-            self.updateAvailableSeats()
+//            self.response.availableSeats += 1
+//            self.available[self.response.name] = String(self.response.availableSeats + 1)
             
-            // store study activity
-            self.addActivity()
+            var index = 0
+            for i in 0...(self.locations.count - 1){
+                if self.locations[i].name == self.response.name {
+                    index = i
+//                    self.ref.child("location").child(String(i)).updateChildValues(["available":self.response.availableSeats])
+                }
+            }
+            
+            self.ref.child("location").child(String(index)).runTransactionBlock({ (data) -> TransactionResult in
+                if var location = data.value as? [String:AnyObject] {
+                    var seats = location["available"] as? Int
+                    seats! += 1
+                    location["available"] = seats as AnyObject
+                    data.value = location
+                    return TransactionResult.success(withValue: data)
+                }
+                return TransactionResult.success(withValue: data)
+            })
+            // update list of availability
+            // self.updateAvailableSeats()
+            
+            // determine seats for current location and set label
+//            let seats = self.available[self.response.name]
+//            self.availableSeatsLabel.text = seats
+            
+            self.updateButtons()
             
         }))
             
@@ -65,40 +145,16 @@ class DetailViewController: UIViewController {
     
     var response: Location!
     var dateComponents = DateComponents()
-    var starttime: Date?
-    var elapsed: TimeInterval = 0
-    var elapsedHours: Double = 0
     var locations: [Location]!
-    
-    // get instance of progress view controller
-//    let viewController = ProgressTableViewController()
-//    viewController.fetchAutoIds()
-    
-    // store autoIds in dictionary
-    var autoIds: [String:String] = [:]
-    var idStorage: [String:String] = [:]
+    var available: [String:String] = [:]
     
     // get current logged in user
     let uid = Auth.auth().currentUser!.uid
     
     var ref: DatabaseReference! = Database.database().reference()
+//    var reference: DatabaseReference?
     
     // MARK: Functions
-
-    // store autoIds in local variable
-//    func fetchAutoIds() {
-//
-//        ref.child("id's").observe(.childAdded, with: { (snapshot) in
-//            if let dict = snapshot.value as? [String:String] {
-//                for (key, value) in dict {
-//                    print("key: \(key)")
-//                    print("value: \(value)")
-//                    self.autoIds[key] = value
-//                    print(self.autoIds)
-//                }
-//            }
-//        }, withCancel: nil)
-//    }
     
     // store location data in firebase
     func storeLocationData() {
@@ -113,42 +169,55 @@ class DetailViewController: UIViewController {
     }
     
     // store activity with properties
-    func addActivity() {
+    func addActivity(start: Date) {
 
+        // format date object to string for firebase
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let time = dateFormatter.string(from: start)
+        
+        // get day and month from date object
         let calendar = Calendar.current
-        let day = calendar.component(.day, from: starttime!)
-        let month = calendar.component(.month, from: starttime!)
+        let day = calendar.component(.day, from: start)
+        let month = calendar.component(.month, from: start)
 
         // get autoID
         let reference = ref.child("users").child(uid).childByAutoId()
         
         // create activity node
-        ref.child("users").child(uid).child(reference.key).setValue(["location": response.name, "duration": elapsedHours, "date": "\(day)/\(month)", "key": reference.key])
+        ref.child("users").child(uid).child(reference.key).setValue(["location": response.name, "starttime": time, "duration": " ", "date": "\(day)/\(month)", "key": reference.key])
         
-//        // store autoIds and uid
-//        let idStorage = [reference.key: uid]
-//        ref.child("id's").setValue(idStorage)
     }
     
-    // retrieve data of study activities of current user --- waarschijnlijk niet nodig --> check dadelijk
-//    func fetchActivityData() {
-//
-//        // observe events for added activity
-//        ref.child("users").child(uid).observe(.childAdded, with: { (snapshot) in
-//            if let dictionary = snapshot.value as? [String:AnyObject] {
-//                print(dictionary)
-//                // DO ADDITIONAL FEATURES
-//            }
-//        }, withCancel: nil)
-//
-//    }
+    func setEndtime(start: String, key: String) {
+        
+        // format starttime (string) to correct date format
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        guard let date = dateFormatter.date(from: start) else {
+            fatalError("ERROR: Date conversion failed due to mismatched format.")
+        }
+        print("current date: \(date)")
+        // calculate duration of activity
+        let elapsed = Date().timeIntervalSince(date)
+        print("elapsed: \(elapsed)")
+        let elapsedHours = Double(elapsed) / 3600
+        
+        // set in database
+        ref.child("users").child(uid).child(key).updateChildValues(["duration": String(elapsedHours)])
+        
+    }
     
     // configure start screen
     func updateUI() {
         
         // set labels with text
         navigationItem.title = response.name
-        availableSeatsLabel.text = String(response.availableSeats)
+        let seats = available[response.name]
+        availableSeatsLabel.text = seats
+            
+//            String(response.availableSeats)
+        
         totalSeatsLabel.text = String(response.totalSeats)
         openingHoursLabel.text = response.openingHours
         
@@ -161,46 +230,112 @@ class DetailViewController: UIViewController {
             studentIdLabel.isHidden = true
             additionalInfoLabel.isHidden = true
         }
-        
-        checkinButton.isEnabled = true
-        checkoutButton.isEnabled = true
-        checkinButton.backgroundColor = UIColor.blue
-        checkoutButton.backgroundColor = UIColor.blue
 
     }
     
-    func updateAvailableSeats() -> Void {
+    // create dict of location and corresponding available seats
+    func fetchAvailableSeats() {
         
-        var handle: DatabaseHandle?
+        // get values of location data
+        ref.child("location").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            // iterate over childs
+            for child in snapshot.children {
+                print(child)
+                let child = (child as! DataSnapshot).value as! [String:AnyObject]
+
+                // determine name and seats, store in dict
+                let name = child["name"] as? String
+                let seats = child["available"] as? Int
+                self.available[name!] = String(seats!)
+            
+            }
+            
+            // set user interface
+            self.updateUI()
+            self.updateButtons()
+            
+        }, withCancel: nil)
         
-        // get reference
+        // observe check-in and check-out events
+        ref.child("location").observe(.childChanged, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String:AnyObject] {
+                
+                // update availability
+                let name = dictionary["name"] as? String
+                let seats = String(self.response.availableSeats) /// NIET RESPONSE.AVAILABLESEATS, KIJK NAAR RUNTRANSACTIONBLOCK!
+                self.available[name!] = seats
+                print(name!)
+                print(seats)
+                
+            }
+
+            self.updateUI()
+            
+        }, withCancel: nil)
+
+    }
+    
+    func updateAvailableSeats() {
+        
+        // iterate over locations
         for i in 0...(locations.count - 1){
             
-            handle = ref.child("location").child(String(i)).child("name").observe(.value, with: { (snapshot) in
+            ref.child("location").child(String(i)).observeSingleEvent(of: .value, with: { (snapshot) in
                 
-                let value = snapshot.value as? String
-                
-                if let actualValue = value {
-                    if actualValue == self.response.name {
+                if let dict = snapshot.value as? [String:AnyObject] {
+                    
+                    // find chosen location
+                    if dict["name"] as? String == self.response.name {
+                        
+                        // update child value of available seats
                         self.ref.child("location").child(String(i)).updateChildValues(["available": self.response.availableSeats])
                     }
                 }
             })
-    
+            
         }
-        
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateUI()
-//        fetchAutoIds()
+    
+    // update check-in and check-out buttons according to activity
+    func updateButtons() {
         
         // check if there are seats available
         if response.availableSeats == 0 {
             checkinButton.isEnabled = false
             checkoutButton.isEnabled = false
         }
+        
+        else {
+        
+            // check if user is already checked in at location
+            ref.child("users").child(uid).observeSingleEvent(of: .value) { (snapshot) in
+                
+                // iterate over activities
+                for child in snapshot.children {
+                    
+                    let child = (child as! DataSnapshot).value as! [String:AnyObject]
+                    
+                    // if location equals location of clicked marker and duration is empty, update buttons
+                    if child["location"] as? String == self.response.name && child["duration"] as? String == " " {
+                        self.checkinButton.isEnabled = false
+                        self.checkoutButton.isEnabled = true
+                        self.checkinButton.backgroundColor = UIColor.lightGray
+                        self.checkoutButton.backgroundColor = UIColor.red
+                    } else {
+                        self.checkinButton.isEnabled = true
+                        self.checkoutButton.isEnabled = false
+                        self.checkoutButton.backgroundColor = UIColor.lightGray
+                        self.checkinButton.backgroundColor = UIColor.red
+                    }
+                }
+            }
+        }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fetchAvailableSeats()
         
         // store UBA locations in firebase
         // uncomment this block the first time you are running this program

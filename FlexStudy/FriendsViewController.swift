@@ -6,18 +6,21 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var searchFriends: UISearchBar!
     
+    // MARK: Variables
+    
     var ref: DatabaseReference = Database.database().reference()
     var users: [String:String] = [:]
     
     // properties of chosen user and last activity
     var emailFriend: String?
-//    var idFriend: String?
     var lastLocation: String?
-    var duration: String?
+    var duration: AnyObject?
     
     // set current day and month
     let date = Date()
     let calendar = Calendar.current
+    
+    // MARK: Functions
     
     // store users in dict as [e-mail address : primary key]
     func fetchUsers() {
@@ -27,7 +30,6 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
             if let dict = snapshot.value as? [String:String] {
                 for (key, value) in dict {
                     self.users[key] = value
-                    print(self.users)
                 }
             }
         }
@@ -39,35 +41,36 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
         
         let currentDay = calendar.component(.day, from: date)
         let currentMonth = calendar.component(.month, from: date)
-        print("\(currentDay)/\(currentMonth)")
         
         // find activities
         ref.child("users").child(friendId).observeSingleEvent(of: .value) { (snapshot) in
             for child in snapshot.children {
-                let child = (child as! DataSnapshot).value as! [String:AnyObject]
                 
-                print(child)
+                let child = (child as! DataSnapshot).value as! [String:AnyObject]
+                print("child: \(child)")
                 
                 // check for activities at current date
                 if child["date"] as? String == "\(currentDay)/\(currentMonth)" {
                     
-                    print("--- IM HERE ----")
-                    
                     // store activity if found
                     self.lastLocation = child["location"] as? String
-                    self.duration = child["duration"] as? String
+                    self.duration = child["duration"]
                     
+                    // alert user with last activity
                     self.alertUser()
-                    
-                }
+                    break // return?
                 
-                // alert user that no activities have been made today
-                else {
-                    print("no activities yet today")
                 }
             }
+                
+            // alert user that no activities have been made today
+            let alert = UIAlertController(title: "Helaas!", message: "Je vriend \(self.emailFriend ?? "") heeft vandaag nog niet bij een UBA locatie ingecheckt", preferredStyle: UIAlertControllerStyle.alert)
+
+            // add return button
+            alert.addAction(UIAlertAction(title: "Oke", style: UIAlertActionStyle.cancel, handler: nil))
+
+            self.present(alert, animated: true, completion: nil)
         }
-            
     }
     
     // search user accounts for typed in friend
@@ -102,12 +105,24 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
     // message user with last activity of a friend
     func alertUser() {
         
-        let alert = UIAlertController(title: "Gevonden!", message: "Je vriend \(emailFriend ?? "") heeft vandaag ingecheckd bij \(lastLocation ?? "") met een duur van \(duration ?? "") uur", preferredStyle: UIAlertControllerStyle.alert)
+        // check if user is currently checked in
+        if duration as? String == " " {
+            
+            let alert = UIAlertController(title: "Gevonden!", message: "Je vriend \(emailFriend ?? "") is op het moment ingecheckt bij \(lastLocation ?? "")", preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction(title: "Oke", style: UIAlertActionStyle.cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
         
-        alert.addAction(UIAlertAction(title: "Oke", style: UIAlertActionStyle.cancel, handler: nil))
+        // otherwise present last activity
+        } else {
         
-        present(alert, animated: true, completion: nil)
-        
+            let alert = UIAlertController(title: "Gevonden!", message: "Je vriend \(emailFriend ?? "") heeft vandaag ingecheckt bij \(lastLocation ?? "") met een duur van \(duration as? String ?? "") uur", preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction(title: "Oke", style: UIAlertActionStyle.cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     override func viewDidLoad() {

@@ -4,7 +4,8 @@ import FirebaseDatabase
 // properties of a study activity
 struct Activity {
     var location: String?
-    var duration: Double?
+    var starttime: Date?
+    var duration: String?
     var date: String?
     var key: String?
 }

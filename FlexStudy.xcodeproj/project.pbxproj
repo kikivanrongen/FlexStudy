@@ -22,6 +22,7 @@
 		27BB996120C5357A008252F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27BB995F20C5357A008252F1 /* LaunchScreen.storyboard */; };
 		27BB996C20C5357B008252F1 /* FlexStudyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB996B20C5357B008252F1 /* FlexStudyTests.swift */; };
 		27BB997720C5357B008252F1 /* FlexStudyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB997620C5357B008252F1 /* FlexStudyUITests.swift */; };
+		27FA996420DA5B8600B131A0 /* ButtonAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FA996320DA5B8600B131A0 /* ButtonAnimations.swift */; };
 		5569D64D8E023C66FD0112F6 /* Pods_FlexStudyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DEA058E6DF3699A2853AD29 /* Pods_FlexStudyUITests.framework */; };
 		9C8BA7A646AA994BB048AD94 /* Pods_FlexStudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A19C7F3CDEB94BE8925A991 /* Pods_FlexStudy.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		27BB997220C5357B008252F1 /* FlexStudyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlexStudyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27BB997620C5357B008252F1 /* FlexStudyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexStudyUITests.swift; sourceTree = "<group>"; };
 		27BB997820C5357B008252F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27FA996320DA5B8600B131A0 /* ButtonAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAnimations.swift; sourceTree = "<group>"; };
 		3A19C7F3CDEB94BE8925A991 /* Pods_FlexStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlexStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DEA058E6DF3699A2853AD29 /* Pods_FlexStudyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlexStudyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B1C99F73D5954E3B9E6F136 /* Pods-FlexStudyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlexStudyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlexStudyTests/Pods-FlexStudyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				2700BC6A20CFE33D00452E15 /* FlexStudy.entitlements */,
 				27BB995620C53577008252F1 /* AppDelegate.swift */,
 				27BB995A20C53577008252F1 /* Main.storyboard */,
+				27FA996320DA5B8600B131A0 /* ButtonAnimations.swift */,
 				2721C39520D9019D00F83649 /* FriendsViewController.swift */,
 				2700BC6820CFC75700452E15 /* LogInViewController.swift */,
 				27240B7620C6B3E8006BE35E /* ProgressTableViewController.swift */,
@@ -444,6 +447,7 @@
 				2700BC6920CFC75700452E15 /* LogInViewController.swift in Sources */,
 				27240B7F20C6BA6A006BE35E /* Location.swift in Sources */,
 				27240B7720C6B3E8006BE35E /* ProgressTableViewController.swift in Sources */,
+				27FA996420DA5B8600B131A0 /* ButtonAnimations.swift in Sources */,
 				27240B7920C6B411006BE35E /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
