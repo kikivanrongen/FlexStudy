@@ -30,7 +30,29 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         // check if user is already logged in
         if let _ = Auth.auth().currentUser {
-            self.performSegue(withIdentifier: "logInSegue", sender: self)
+            
+            // ask user to check-in with currently known email address
+            let email = Auth.auth().currentUser!.email
+            
+            let alert = UIAlertController(title: "Facebook Log-in", message: "Wil je inloggen met het e-mailadres \(email ?? "")?", preferredStyle: UIAlertControllerStyle.alert)
+            
+            // go to next view controller if email address is correct
+            alert.addAction(UIAlertAction(title: "Ja", style: UIAlertActionStyle.default, handler: { action in
+                self.performSegue(withIdentifier: "logInSegue", sender: self)
+            }))
+            
+            // log out user
+            alert.addAction(UIAlertAction(title: "Nee", style: UIAlertActionStyle.cancel, handler: { action in
+                let manager: FBSDKLoginManager = FBSDKLoginManager()
+                manager.logOut()
+                
+                // clear token and profile --> NECESSARY??
+                FBSDKAccessToken.setCurrent(nil)
+                FBSDKProfile.setCurrent(nil)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+
         }
     }
     

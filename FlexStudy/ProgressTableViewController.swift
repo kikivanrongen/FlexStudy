@@ -52,17 +52,17 @@ class ProgressTableViewController: UITableViewController {
             }
         }, withCancel: nil)
         
-        // observe events for removed activity
-        ref.child("users").child(uid).observe(.childRemoved, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String:AnyObject] {
-                print("---- ACTIVITIES REMOVED ----")
-                print(dictionary)
-                let removedActivity = Activity(location: dictionary["location"] as? String, starttime: dictionary["starttime"] as? Date, duration: dictionary["duration"] as? String, date: dictionary["date"] as? String, key: dictionary["key"] as? String)
-                self.removeItemFromDatabase(removedActivity)
-                
-                self.tableView.reloadData()
-            }
-        },withCancel: nil)
+        // observe events for removed activity // NIET NODIG --> JE DOET NIKS MET DE REMOVED ACTIVITY
+//        ref.child("users").child(uid).observe(.childRemoved, with: { (snapshot) in
+//            if let dictionary = snapshot.value as? [String:AnyObject] {
+//                print("---- ACTIVITIES REMOVED ----")
+//                print(dictionary)
+//                let removedActivity = Activity(location: dictionary["location"] as? String, starttime: dictionary["starttime"] as? Date, duration: dictionary["duration"] as? String, date: dictionary["date"] as? String, key: dictionary["key"] as? String)
+////                self.removeItemFromDatabase(removedActivity) // is al gebeurd hier ....
+//
+//                self.tableView.reloadData()
+//            }
+//        },withCancel: nil)
         
         // observe events for changed activity
         ref.child("users").child(uid).observe(.childChanged, with: { (snapshot) in
@@ -145,14 +145,14 @@ class ProgressTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 
-//            let removedActivity = activities[indexPath.row]
+            let removedActivity = activities[indexPath.row]
             
             // update table view
             activities.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             // acces database and remove
-//            removeItemFromDatabase(removedActivity)
+            removeItemFromDatabase(removedActivity)
             
         }
     }
@@ -164,7 +164,6 @@ class ProgressTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         fetchActivityData()
-//        fetchAutoIds()
         updateUI()
         super.viewDidLoad()
 

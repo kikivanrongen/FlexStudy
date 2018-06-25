@@ -11,6 +11,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
     
     var mapView: GMSMapView?
     var chosenLocation: Location?
+    var markers: [GMSMarker] = []
     
     // object with UBA locations information
     var locations: [Location] = [
@@ -33,6 +34,31 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
     // configure start UI
     func updateUI() {
         
+//        // create camera position and mapview
+//        let camera = GMSCameraPosition.camera(withLatitude: 52.365766, longitude: 4.902576, zoom: 14)
+//        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+//
+//        // set view
+//        mapView.isMyLocationEnabled = true
+//        mapView.delegate = self
+//        self.view = mapView
+        
+        // create markers for all UBA locations
+        for location in locations {
+        
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2DMake(location.lat, location.long)
+            marker.title = location.name
+            marker.snippet = location.address
+//            marker.map = mapView
+            markers.append(marker)
+            showMarkers(markers)
+            
+        }
+    }
+    
+    func showMarkers(_ markers: [GMSMarker]) {
+        
         // create camera position and mapview
         let camera = GMSCameraPosition.camera(withLatitude: 52.365766, longitude: 4.902576, zoom: 14)
         let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
@@ -42,15 +68,9 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
         mapView.delegate = self
         self.view = mapView
         
-        // add markers to mapview
-        for location in locations {
-        
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2DMake(location.lat, location.long)
-            marker.title = location.name
-            marker.snippet = location.address
+        // add markers to map
+        for marker in markers {
             marker.map = mapView
-        
         }
     }
     
@@ -83,6 +103,26 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func unwindToLocations (_ sender: UIStoryboardSegue){
+        if sender.source is FriendsViewController {
+            if let senderVC = sender.source as? FriendsViewController {
+                
+                // remove old marker from list
+                var index = 0
+                for marker in markers {
+                    if marker.title == senderVC.newMarker.title {
+                        markers.remove(at: index)
+                    }
+                    index += 1
+                }
+                
+                // append new marker with friend location and show on map
+                markers.append(senderVC.newMarker)
+                showMarkers(markers)
+            }
+        }
     }
 
 }

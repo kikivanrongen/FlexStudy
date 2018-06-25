@@ -24,22 +24,21 @@ class DetailViewController: UIViewController {
         // pulse animation
         sender.pulsate()
         
+        // disable checkin and enable checkout button
         updateButtons()
         
         // set start time
         let starttime = Date()
         
-        // update available seats
-//        self.response.availableSeats -=1
-        
+        // find index of chosen location
         var index = 0
         for i in 0...(self.locations.count - 1){
             if self.locations[i].name == self.response.name {
                 index = i
-                //                    self.ref.child("location").child(String(i)).updateChildValues(["available":self.response.availableSeats])
             }
         }
         
+        // update available seats of location
         self.ref.child("location").child(String(index)).runTransactionBlock({ (data) -> TransactionResult in
             if var location = data.value as? [String:AnyObject] {
                 var seats = location["available"] as? Int
@@ -50,13 +49,6 @@ class DetailViewController: UIViewController {
             }
             return TransactionResult.success(withValue: data)
         })
-        
-        // update list of availability
-        // self.updateAvailableSeats()
-        
-        // determine seats for current location and set label
-//        let seats = self.available[self.response.name]
-//        self.availableSeatsLabel.text = seats
         
         // store activity in database
         addActivity(start: starttime)
@@ -102,19 +94,15 @@ class DetailViewController: UIViewController {
                 
             }, withCancel: nil)
             
-            
-            // update available seats
-//            self.response.availableSeats += 1
-//            self.available[self.response.name] = String(self.response.availableSeats + 1)
-            
+            // find index of chosen location
             var index = 0
             for i in 0...(self.locations.count - 1){
                 if self.locations[i].name == self.response.name {
                     index = i
-//                    self.ref.child("location").child(String(i)).updateChildValues(["available":self.response.availableSeats])
                 }
             }
             
+            // update available seats of location
             self.ref.child("location").child(String(index)).runTransactionBlock({ (data) -> TransactionResult in
                 if var location = data.value as? [String:AnyObject] {
                     var seats = location["available"] as? Int
@@ -125,13 +113,8 @@ class DetailViewController: UIViewController {
                 }
                 return TransactionResult.success(withValue: data)
             })
-            // update list of availability
-            // self.updateAvailableSeats()
             
-            // determine seats for current location and set label
-//            let seats = self.available[self.response.name]
-//            self.availableSeatsLabel.text = seats
-            
+            // disable checkout and enable checkin button
             self.updateButtons()
             
         }))
@@ -215,8 +198,6 @@ class DetailViewController: UIViewController {
         navigationItem.title = response.name
         let seats = available[response.name]
         availableSeatsLabel.text = seats
-            
-//            String(response.availableSeats)
         
         totalSeatsLabel.text = String(response.totalSeats)
         openingHoursLabel.text = response.openingHours
@@ -241,7 +222,7 @@ class DetailViewController: UIViewController {
             
             // iterate over childs
             for child in snapshot.children {
-                print(child)
+
                 let child = (child as! DataSnapshot).value as! [String:AnyObject]
 
                 // determine name and seats, store in dict
@@ -263,10 +244,8 @@ class DetailViewController: UIViewController {
                 
                 // update availability
                 let name = dictionary["name"] as? String
-                let seats = String(self.response.availableSeats) /// NIET RESPONSE.AVAILABLESEATS, KIJK NAAR RUNTRANSACTIONBLOCK!
-                self.available[name!] = seats
-                print(name!)
-                print(seats)
+                let seats = dictionary["available"] as? Int
+                self.available[name!] = String(seats!)
                 
             }
 
@@ -274,27 +253,6 @@ class DetailViewController: UIViewController {
             
         }, withCancel: nil)
 
-    }
-    
-    func updateAvailableSeats() {
-        
-        // iterate over locations
-        for i in 0...(locations.count - 1){
-            
-            ref.child("location").child(String(i)).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                if let dict = snapshot.value as? [String:AnyObject] {
-                    
-                    // find chosen location
-                    if dict["name"] as? String == self.response.name {
-                        
-                        // update child value of available seats
-                        self.ref.child("location").child(String(i)).updateChildValues(["available": self.response.availableSeats])
-                    }
-                }
-            })
-            
-        }
     }
     
     // update check-in and check-out buttons according to activity

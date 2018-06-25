@@ -1,6 +1,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import GoogleMaps
 
 class FriendsViewController: UIViewController, UISearchBarDelegate {
 
@@ -15,6 +16,9 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
     var emailFriend: String?
     var lastLocation: String?
     var duration: AnyObject?
+    
+    // create new GMSMarker for friend location
+    var newMarker = GMSMarker()
     
     // set current day and month
     let date = Date()
@@ -110,18 +114,65 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
             
             let alert = UIAlertController(title: "Gevonden!", message: "Je vriend \(emailFriend ?? "") is op het moment ingecheckt bij \(lastLocation ?? "")", preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction(title: "Oke", style: UIAlertActionStyle.cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ga naar map", style: UIAlertActionStyle.cancel, handler: { action in
+                
+                // update location marker with friend location
+                self.performSegue(withIdentifier: "unwindToLocations", sender: nil)
+                
+            }))
             
             present(alert, animated: true, completion: nil)
+            
+            // delay alert with 5 seconds
+//            let when = DispatchTime.now() + 5
+//            DispatchQueue.main.asyncAfter(deadline: when){
+//                alert.dismiss(animated: true, completion: nil)
+//            }
+            
+
         
         // otherwise present last activity
         } else {
-        
-            let alert = UIAlertController(title: "Gevonden!", message: "Je vriend \(emailFriend ?? "") heeft vandaag ingecheckt bij \(lastLocation ?? "") met een duur van \(duration as? String ?? "") uur", preferredStyle: UIAlertControllerStyle.alert)
+            
+            // convert duration to string format
+//            let durationString = String(format: "%.2f", Double(duration as! NSNumber))
+            
+            let alert = UIAlertController(title: "Gevonden!", message: "Je vriend \(emailFriend ?? "") heeft vandaag ingecheckt bij \(lastLocation ?? "")", preferredStyle: UIAlertControllerStyle.alert)
             
             alert.addAction(UIAlertAction(title: "Oke", style: UIAlertActionStyle.cancel, handler: nil))
             
             present(alert, animated: true, completion: nil)
+            
+        }
+    }
+    
+    // set new marker and pass on to location view controller
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "unwindToLocations" {
+            let locationVC = segue.destination as! LocationViewController
+            let locations = locationVC.locations
+            
+            // store address, latitude and longitude for friend's location
+            var address: String!
+            var lat: CLLocationDegrees!
+            var long: CLLocationDegrees!
+            
+            // iterate over locations
+            for location in locations {
+                if location.name == lastLocation {
+                    address = location.address
+                    lat = location.lat
+                    long = location.long
+                }
+            }
+            
+            // set marker properties
+            newMarker.position = CLLocationCoordinate2DMake(lat, long)
+            newMarker.title = lastLocation
+            newMarker.snippet = "\(address!) \n \(emailFriend ?? "")"
+            newMarker.icon = GMSMarker.markerImage(with: .blue)
+            // show info window immediately??
+            
         }
     }
     
