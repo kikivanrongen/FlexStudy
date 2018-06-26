@@ -36,3 +36,6 @@ Nieuwe functie gemaakt 'updateButtons()' die de buttons enabled adhv of een user
 
 # day 13
 Er wordt nu een nieuwe marker toegevoegd met andere kleur op het moment dat een vriend is gevonden. Code is wat bijgewerkt en ziet er netter uit. Alle functies werken volledig nu (ook met firebase).
+
+# day 14
+Alleen maar lay-out doen. Lettertypes uitzoeken, kleuren etc.
