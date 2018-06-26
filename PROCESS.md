@@ -33,3 +33,9 @@ Functie addActivity wordt nu aangeroepen bij check-in. Hierdoor kunnen vrienden 
 
 # day 12
 Nieuwe functie gemaakt 'updateButtons()' die de buttons enabled adhv of een user al is ingecheckt. Volgende probleem: de starttijd wordt nergens opgeslagen in firebase (alleen lokaal). Dit betekent dat op het moment dat een user incheckd, de app afsluit en terugkomt dat hij niet meer kan uitchecken omdat de starttijd niet bekend is. RunTransactionBlock toegevoegd bij het updaten van beschikbare plekken. Dit voorkomt dat het mis gaat op het moment dat studenten tegelijkertijd inchecken en uitchecken.
+
+# day 13
+Er wordt nu een nieuwe marker toegevoegd met andere kleur op het moment dat een vriend is gevonden. Code is wat bijgewerkt en ziet er netter uit. Alle functies werken volledig nu (ook met firebase).
+
+# day 14
+Alleen maar lay-out doen. Lettertypes uitzoeken, kleuren etc. Icons toegevoegd aan tab bar controller
