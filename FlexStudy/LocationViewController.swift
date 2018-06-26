@@ -50,6 +50,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
             marker.position = CLLocationCoordinate2DMake(location.lat, location.long)
             marker.title = location.name
             marker.snippet = location.address
+            marker.icon = GMSMarker.markerImage(with: .blue)
 //            marker.map = mapView
             markers.append(marker)
             showMarkers(markers)
@@ -57,6 +58,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
         }
     }
     
+    // show markers on the map
     func showMarkers(_ markers: [GMSMarker]) {
         
         // create camera position and mapview

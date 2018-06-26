@@ -165,6 +165,18 @@ class ProgressTableViewController: UITableViewController {
     override func viewDidLoad() {
         fetchActivityData()
         updateUI()
+        
+        // set background image
+//        tableView.backgroundView = UIImageView(image: UIImage(named: "stars"))
+        
+//        let imgView =  UIImageView(frame: self.tableView.frame)
+//        let img = UIImage(named: "four stars")
+//        imgView.image = img
+//        imgView.frame = CGRect(x: 0.0, y: 0.0, width: tableView.frame.width, height: tableView.frame.height)
+//        imgView.contentMode = UIViewContentMode.scaleAspectFill
+//        tableView.addSubview(imgView)
+
+
         super.viewDidLoad()
 
     }

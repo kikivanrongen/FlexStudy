@@ -13,6 +13,14 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         ref = Database.database().reference()
         
+        // set background image
+        let imgView =  UIImageView(frame: self.view.frame)
+        let img = UIImage(named: "stars")
+        imgView.image = img
+        imgView.frame = CGRect(x: 0.0, y: 0.0, width: view.frame.width, height: view.frame.height)
+        imgView.contentMode = UIViewContentMode.scaleAspectFill
+        view.addSubview(imgView)
+        
         // get fb login button
         let loginButton = FBSDKLoginButton()
         view.addSubview(loginButton)
@@ -83,6 +91,9 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         // store in database
         storeUserInFirebase()
+        
+        // go to location view controller
+        self.performSegue(withIdentifier: "logInSegue", sender: self)
     }
     
     func storeUserInFirebase() {
@@ -108,7 +119,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             self.ref.child("email addresses").setValue(self.mailStorage)
             
             // go to location view controller
-            self.performSegue(withIdentifier: "logInSegue", sender: self)
+//            self.performSegue(withIdentifier: "logInSegue", sender: self)
             
         })
 

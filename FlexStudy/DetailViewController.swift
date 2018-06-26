@@ -11,7 +11,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var totalSeatsLabel: UILabel!
     @IBOutlet weak var openingHoursLabel: UILabel!
     @IBOutlet weak var studentIdLabel: UILabel!
-    @IBOutlet weak var additionalInfoLabel: UILabel!
     
     @IBOutlet weak var checkinButton: UIButton!
     @IBOutlet weak var checkoutButton: UIButton!
@@ -202,16 +201,29 @@ class DetailViewController: UIViewController {
         totalSeatsLabel.text = String(response.totalSeats)
         openingHoursLabel.text = response.openingHours
         
+        // view additional information for location if required
         if response.studentId == true {
             studentIdLabel.isHidden = false
-            additionalInfoLabel.isHidden = false
+//            additionalInfoLabel.isHidden = false
         }
             
         else {
             studentIdLabel.isHidden = true
-            additionalInfoLabel.isHidden = true
+//            additionalInfoLabel.isHidden = true
         }
-
+        
+        // set layout for buttons
+        
+        // border color
+        checkinButton.layer.borderColor = UIColor(red:1.00, green:0.76, blue:0.97, alpha:1.0).cgColor
+        checkoutButton.layer.borderColor = UIColor(red:1.00, green:0.76, blue:0.97, alpha:1.0).cgColor
+        
+        // round borders
+        checkinButton.layer.cornerRadius = 20
+        checkinButton.layer.borderWidth = 1
+        checkoutButton.layer.cornerRadius = 20
+        checkoutButton.layer.borderWidth = 1
+        
     }
     
     // create dict of location and corresponding available seats
@@ -274,17 +286,20 @@ class DetailViewController: UIViewController {
                     
                     let child = (child as! DataSnapshot).value as! [String:AnyObject]
                     
-                    // if location equals location of clicked marker and duration is empty, update buttons
+                    // check for clicked marker location and empty duration variable, update buttons
                     if child["location"] as? String == self.response.name && child["duration"] as? String == " " {
                         self.checkinButton.isEnabled = false
                         self.checkoutButton.isEnabled = true
-                        self.checkinButton.backgroundColor = UIColor.lightGray
-                        self.checkoutButton.backgroundColor = UIColor.red
+                        self.checkinButton.setTitleColor(.lightGray, for: .normal)
+//                        self.checkinButton.layer.borderColor = UIColor.lightGray.cgColor
+                        self.checkoutButton.setTitleColor(.black, for: .normal)
+                        
                     } else {
                         self.checkinButton.isEnabled = true
                         self.checkoutButton.isEnabled = false
-                        self.checkoutButton.backgroundColor = UIColor.lightGray
-                        self.checkinButton.backgroundColor = UIColor.red
+                        self.checkinButton.setTitleColor(.black, for: .normal)
+                        self.checkoutButton.setTitleColor(.lightGray, for: .normal)
+//                        self.checkoutButton.layer.borderColor = UIColor.lightGray.cgColor
                     }
                 }
             }

@@ -170,8 +170,7 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
             newMarker.position = CLLocationCoordinate2DMake(lat, long)
             newMarker.title = lastLocation
             newMarker.snippet = "\(address!) \n \(emailFriend ?? "")"
-            newMarker.icon = GMSMarker.markerImage(with: .blue)
-            // show info window immediately??
+            newMarker.icon = GMSMarker.markerImage(with: .green)
             
         }
     }
