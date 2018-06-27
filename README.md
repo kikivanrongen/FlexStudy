@@ -16,6 +16,9 @@ Student at the University of Amsterdam
 <p float="left">
   <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="120" height="210" />
   <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="120" height="210" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm3.png width="120" height="210" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm4.png width="120" height="210" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm5.png width="120" height="210" />
 </p>
  
 
