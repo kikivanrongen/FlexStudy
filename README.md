@@ -14,11 +14,11 @@ Student at the University of Amsterdam
 
 ## App screens running
 <p float="left">
-  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="170" height="270" />
-  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="170" height="270" />
-  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm3.png width="170" height="270" />
-  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm4.png width="170" height="270" />
-  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm5.png width="170" height="270" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="170" height="280" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="170" height="280" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm3.png width="170" height="280" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm4.png width="170" height="280" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm5.png width="170" height="280" />
 </p>
  
 
