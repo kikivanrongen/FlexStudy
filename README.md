@@ -9,4 +9,4 @@ database (Firebase) so that availability of study places is constantly tracked a
 Kiki van Rongen
 Student at the University of Amsterdam
 
-Copyright © 2018, Kiki van Rongen. All rights reserved. 
+<sup>Copyright © 2018, Kiki van Rongen. All rights reserved.</sup>
