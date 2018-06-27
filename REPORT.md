@@ -30,7 +30,15 @@ The locations have been manually set in a list and are all stored in firebase on
 The log out button at the top logs out the user using FacebookLoginManager and unwinds to the 'log in view controller'.
 
 ## Detail view controller
-This screen displays the information of the variable 'chosenLocation'. First, the  are set
+This screen displays the information of the variable 'chosenLocation'. In the viewDidLoad function the available seats of chosenLocation are fetched from Firebase. If this is completed the updateUI() and updateButtons() function is triggered. The first function sets the labels with the correct titles/values. The second function first checks whether there are seats available. If not, it disables checkin. Otherwise, it looks into firebase at the current logged in user node and checks whether the user is already checked in at the location. This is the case if the duration is empty. This means that an activity is started but not yet ended. It updates the buttons accordingly. 
+
+When the check-in button is pressed (with pulse animation), a couple of things happen:
+1) updateButtons() function is triggered so that checkin is disabled and checkout enabled. 
+2) Starttime is set at current time in date object
+3) The available seats of the location is updated in firebase. Via an 'observe event of child changed' this is also visible for other users.
+4) addActivity() is triggered
+
+The function addActivity() stores information of the currently started activity in firebase. It first converts the start date to string as firebase does not accept date types.  
 
  
 
