@@ -9,6 +9,6 @@ database (Firebase) so that availability of study places is constantly tracked a
 Kiki van Rongen
 Student at the University of Amsterdam
 
-<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Storyboard%20overview.png alt="Storyboard overview" width="150" height="100">
+<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Storyboard%20overview.png alt="Storyboard overview" width="250" height="200">
 
 <sup>Copyright © 2018, Kiki van Rongen. All rights reserved.</sup>
