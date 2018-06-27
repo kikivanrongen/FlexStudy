@@ -1,36 +1,25 @@
 # FlexStudy
 
-## Problem statement
-Students often come across the problem that they want to study in the university library, but don’t know if the place they want to go 
-to actually has available seats. Universities have many buildings suitable for studying, some of which students have never heard of. The spread of students over multiple study locations in Amsterdam can be better organised.
+## Purpose
+This app contains information regarding all study (UBA) locations of the University of Amsterdam. It allows students to check-in and check-out
+at a specific study location, track their study progression and locate friends at (other) UBA locations. The app is closely integrated with an online
+database (Firebase) so that availability of study places is constantly tracked and updated. 
 
-## Solution
-The app ‘FlexStudy’ is a platform where students can check-in whenever they are at a seat in one of the university libraries.
-The app will then update the number of seats available in that building. Via a google maps visualization students will be able to have 
-a quick overview of the availability of study places in all the locations of the University of Amsterdam. When students leave their seat,
-they check-out and the app will enable the seat for the next student. 
+## Name
+Kiki van Rongen
+Student at the University of Amsterdam
 
-## Main features
-### MVP
-- Check-in function
-- Check-out function
-- Search location function
-- Available seats per location overview in Google Maps
-- Opening hours of every location
-- Additional requirements for entering (student id)
-- Keep track of your study hours (graph/table) 
+## Storyboard overview
+<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Storyboard%20overview.png width="800" height="500">
 
-### Optional
-- Connect with friends and see where your friends are studying
-- Filter at opening hours
+## App screens running
+<p float="left">
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="170" height="290" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="170" height="290" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm3.png width="170" height="290" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm4.png width="170" height="290" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm5.png width="170" height="290" />
+</p>
+ 
 
-### Optional libraries
-- Hero: view controller transitions
-
-## Prerequisites
-- Google maps API: https://cloud.google.com/maps-platform/maps/
-- Hero library
-- Similar view controllers: Zara app, sleep cycle
-- Hardest part: Find friends at location, correct data structure, search and filter function
-
-![alt text](https://github.com/kikivanrongen/FlexStudy/blob/master/doc/App%20overview.png "App overview")
+<sup>Copyright © 2018, Kiki van Rongen. All rights reserved.</sup>
