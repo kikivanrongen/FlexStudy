@@ -30,7 +30,7 @@ The locations have been manually set in a list and are all stored in firebase on
 The log out button at the top logs out the user using FacebookLoginManager and unwinds to the 'log in view controller'.
 
 ## Detail view controller
-This screen displays the information of the variable 'chosenLocation'. First, the u
+This screen displays the information of the variable 'chosenLocation'. First, the  are set
 
  
 
