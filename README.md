@@ -14,7 +14,7 @@ Student at the University of Amsterdam
 
 ## App screens running
 
-<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="150" height="200">
-<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="150" height="200">
+<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="120" height="200">
+<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="120" height="200">
 
 <sup>Copyright © 2018, Kiki van Rongen. All rights reserved.</sup>
