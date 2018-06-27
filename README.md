@@ -13,8 +13,10 @@ Student at the University of Amsterdam
 <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Storyboard%20overview.png width="800" height="500">
 
 ## App screens running
-
-<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="120" height="210">
-<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="120" height="210">
+<p float="left">
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm1.png width="120" height="210" />
+  <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="120" height="210" />
+</p>
+ 
 
 <sup>Copyright © 2018, Kiki van Rongen. All rights reserved.</sup>
