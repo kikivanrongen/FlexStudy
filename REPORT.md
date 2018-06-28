@@ -30,7 +30,34 @@ The locations have been manually set in a list and are all stored in firebase on
 The log out button at the top logs out the user using FacebookLoginManager and unwinds to the 'log in view controller'.
 
 ## Detail view controller
-This screen displays the information of the variable 'chosenLocation'. First, the  are set
+This screen displays the information of the variable 'chosenLocation'. In the viewDidLoad function the available seats of chosenLocation are fetched from Firebase via fetchAvailableSeats() with a single event observer. If this is completed the updateUI() and updateButtons() function is triggered. The first function sets the labels with the correct titles/values. The second function first checks whether there are seats available. If not, it disables checkin. Otherwise, it looks into firebase at the current logged in user node and checks whether the user is already checked in at the location. This is the case if the duration is empty. This means that an activity is started but not yet ended. It updates the buttons accordingly. 
+
+When the check-in button is pressed (with pulse animation), a couple of things happen:
+1) updateButtons() function is triggered so that checkin is disabled and checkout enabled. 
+2) Starttime is set at current time in date object
+3) The available seats of the location is updated in firebase. Via an 'observe event of child changed' this is also visible for other users.
+4) addActivity() is triggered
+
+The function addActivity() stores information of the currently started activity in firebase. It first converts the start date to string as firebase does not accept 'date' objects. Then it substracts the month and date of the starttime 'date' object and stores it into a date variable with structure "\(day)/\(month)". It generates an automated autoid key in firebase and stores this in firebase too so it is easy to look up activities. 
+
+When the check-out button is pressed (with pulse animation), an alert pops up prompting the user to confirm their check-out. At confirmation the following happens:
+1) the key and starttime of the ended activity is determined via 'observeSingleEvent'. This is done via iteration over all activities of the logged in user and selecting the one that has an empty duration (as this is the activity that the user is currently attending). If the starttime is determined a function setEndtime() is triggered. In this function a dateformatter is established in order to convert the starttime to a date object again, so that the elapsed time can be determined. Elapsed time is calculated via the timeIntervalSince method and then converted to hours. 
+2) The index of the chosen location in the locations list is determined so that we can update the available seats in firebase. This is necessary because locations are stored with child id corresponding to their index in the locations list. Therefore, in order to acces the information of a locations in firebase we must first determine the correct index. When completed, the seats are updated via a runTransactionBlock. This is a built-in method of firebase that ensures that the availability update runs smoothly. For example, if two users were to check out at the same time this might cause problems as firebase would receive two updates at a time. RunTransacitonBlock prevents that. 
+3) updateButtons() is again triggered to make sure that checkin is again enabled and checkout disabled. 
+
+# ProgressViewController
+The user can tap on the progress icon below. This will redirect to the progress screen. Herein the viewDidLoad functions starts with two functions:
+1) fetchActivityData(); This function contains of two parts. First, all the activities are seperately stored in a list 'activites'
+2) updateUI()
+
+
+
+
+
+
+
+
+
 
  
 
