@@ -1,7 +1,7 @@
 # Description
 This app allows students to check-in and check-out at study locations of the UvA, track study activities and find study friends at other locations.
 
-<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png width="170" height="290" />
+<img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm2.png alt="app start screen" width="170" height="290" />
 
 # Technical design
 When the user opens the app the log in screen is presented. The app allows the user to login via facebook. However, if the current user has already opened the app previously, the user is prompted with an alert. This alert suggests whether he would like to proceed with the currently signed in user at facebook. When the user has logged in with a facebook account the screen redirects to the 'location view controller'. 
@@ -22,7 +22,7 @@ The computer will now set the current date and check whether the friend is curre
 # Detail design
 ## Log in view controller
 In the viewDidAppear function the program checks for currentUser being equal to nil. If this is not the case, the user is alerted with the question whether it wants to login with the currently known email address. If so it is immediately directed to 'location view controller'.
-Otherwise, the user must log in via the built-in facebook button. Facebook asks permission for email and public profile and if accepted the user is logged in and redirected to the 'location view controller'.
+Otherwise, the user must log in via the built-in facebook button. Facebook asks permission for email and public profile and if accepted the user is logged in, stored in firebase via storeUserInFirebase() and redirected to the 'location view controller'. The storeUserInFirebase function sets the current acces token and creates the user in the database. it can then be found under 'authentication'. Another node is also created called 'email addresses' in which users are stores as [user id : email address]. This is necessary for the find friends function that will be explained later on. The Log In View Controller also contains an IBAction for the unwind segue from the logout button in location view controller.
 
 ## Location view controller
 The locations have been manually set in a list and are all stored in firebase once (first time you run the program). Each location is of a struct 'Location' containing: name, address, latitude, longitude, opening hours, total seats, available seats and studentID (boolean). For every location a marker is created in the updateUI() function and all these markers are again stored in a list. The markers are then showed on the map via the showMarkers() function. Clicking on a marker triggers the info window to pop up and clicking the infowindow redirects the user to the next view controller (mapview function, built-in google maps function). The chosen location is stored in a variable and is passed on to the screen (detail view controller), as well as the list of locations.
@@ -46,9 +46,27 @@ When the check-out button is pressed (with pulse animation), an alert pops up pr
 3) updateButtons() is again triggered to make sure that checkin is again enabled and checkout disabled. 
 
 # ProgressViewController
-The user can tap on the progress icon below. This will redirect to the progress screen. Herein the viewDidLoad functions starts with two functions:
-1) fetchActivityData(); This function contains of two parts. First, all the activities are seperately stored in a list 'activites'
-2) updateUI()
+The user can tap on the progress icon below. This will redirect to the progress screen which is a tablevliew of all the started and ended activities of the user. Herein the viewDidLoad functions starts with two functions:
+1) fetchActivityData(); This function contains of two parts. First, all the activities are seperately stored in an object Activity, via an observe ChildAdded event. The Activity structure contains location, starttime, duration, date and key. After this, the object is stored in a list 'activities' and the table is reloaded. Secondly, the functions observes events for childChanged. This is needed so that an activity cell is updated when an activity is ended (and duration is set). The observer determines which activity is modified, which index this activity has in the activities list and removes it accordingly. It then creates a new (updated) Activity object and appends it to the activities list. This way the activity is not shown twice. When completed it reloads the tableview again. 
+2) updateUI(); this function just sets the navigation title. A seperate function is made for the simple reason that lay-out can be adjusted herein.
+
+There are also a number of tableview functions:
+1) cellForRowAt function: This function sets the content of a particular cell and returns it. For the cell to have the correct structure a class is created at the top of the progressTableViewController. This is called ProgressViewCell and in this class the outlets for three labels are created: date, location and duration. Within the cellForRowAt function these labels are set using the information stored in the activities list (fetched under fetchActivityData()). 
+2) numberOfRowsInSection function: This just counts the number of activities that the user has and returns this exact number.
+3) canEditRowAt function: To enable editing of cells, returns true
+4) commit editingstyle function: function to enable deleting cells. It selects the indexPath that is chosen and removes this element from the activities list. The function removeItemFromDatabase() is then triggered with argument the removed activity. Here, the activity key is determined and the built-in function 'removeValue' is called to remove the activity with this particular id in firebase. 
+
+Last, in the upper right corner a button is displayed called 'find friends' Clicking the button redirects to the friends view controller
+
+# Friends view controller
+In this view controller the user is able to check whether friends are at a UBA location at the moment. The viewDidLoad function calls fetchUsers(). This function iterates over all users in firebase in the 'email addresses' node and stores them in a dictionary, called users. 
+
+The screen displays a search bar in which the user can enter a email address. When the user hits enter the searchBarSearchButtonClicked() function is triggered. This function iterated over the users dictionary and checks whether the typed in address corresponds to an email address in the dictionary. If so, the function fetchLastActivity() is called, otherwise the user is alerted that there is no such user known in the database or it might be typed in wrong. fetchLastActivity() first determines the current date and month. It then iterates (via a single event observer) over every activity of the found friend and looks for activities that match the current date. When an activity today is found, it stores the location and duration in seperate variables. and calls alertUser().
+
+alertUser() first checks whether the found activity is already ended or not via the duration variable stored earlier. If this variable is empty it alerts the user that his friend is currently checked in at a specific location (known because of the previously stored location variable). This alert also has an action that can redirects the user to the map with an unwind segue. This unwind segue passes on a marker created in the override perpare function. There, it first fetches information of the friend's location. It then creates a new marker with this information, adds the emaill address of the friend in the info window, and changes the color to green. This will make it clear to the user where the friend is at the map. The Location View Controller contains an IBAction for this unwind segue and makes sure that the markers list is updated with the newly created marker: it removes the old one and appends the new one (passed on with the segue) and displays all markers again on the map via showMarkers(). 
+
+
+
 
 
 
