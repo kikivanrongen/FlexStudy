@@ -62,7 +62,7 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
                     
                     // alert user with last activity
                     self.alertUser()
-                    break // return?
+                    break
                 
                 }
             }
@@ -124,20 +124,9 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
             alert.addAction(UIAlertAction(title: "Terug", style: UIAlertActionStyle.cancel, handler: nil))
             
             present(alert, animated: true, completion: nil)
-            
-            // delay alert with 5 seconds
-//            let when = DispatchTime.now() + 5
-//            DispatchQueue.main.asyncAfter(deadline: when){
-//                alert.dismiss(animated: true, completion: nil)
-//            }
-            
-
         
         // otherwise present last activity
         } else {
-            
-            // convert duration to string format
-//            let durationString = String(format: "%.2f", Double(duration as! NSNumber))
             
             let alert = UIAlertController(title: "Gevonden!", message: "Je vriend \(emailFriend ?? "") heeft vandaag ingecheckt bij \(lastLocation ?? "")", preferredStyle: UIAlertControllerStyle.alert)
             

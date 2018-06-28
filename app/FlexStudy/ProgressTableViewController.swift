@@ -22,7 +22,7 @@ class ProgressTableViewController: UITableViewController {
     // MARK: Variables
     
     var ref: DatabaseReference = Database.database().reference()
-    let uid = Auth.auth().currentUser!.uid
+    let uid = Auth.auth().currentUser?.uid
     var activities = [Activity]()
     var autoIds: [String:String] = [:]
     
@@ -40,7 +40,7 @@ class ProgressTableViewController: UITableViewController {
 
         
         // observe events for added activity
-        ref.child("users").child(uid).observe(.childAdded, with: { (snapshot) in
+        ref.child("users").child(uid!).observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String:AnyObject] {
 
                 // create new activity object for each fetched activity and store in list
@@ -52,7 +52,7 @@ class ProgressTableViewController: UITableViewController {
         }, withCancel: nil)
         
         // observe events for changed activity
-        ref.child("users").child(uid).observe(.childChanged, with: { (snapshot) in
+        ref.child("users").child(uid!).observe(.childChanged, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String:AnyObject] {
                 
                 // iterate over activities
@@ -85,16 +85,17 @@ class ProgressTableViewController: UITableViewController {
         let key = activity.key
         
         // remove item in firebase
-        self.ref.child("users").child(uid).child(key!).removeValue { (error, refer) in
+        self.ref.child("users").child(uid!).child(key!).removeValue { (error, refer) in
             if error != nil {
                 print(error ?? "")
             } else {
-                print(refer)
                 print("child removed correctly")
             }
         }
     
     }
+    
+    // MARK: Tableview functions
     
     // create cells
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -141,6 +142,8 @@ class ProgressTableViewController: UITableViewController {
         }
     }
 
+    // MARK: Load functions
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()

@@ -86,14 +86,19 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                 return
             }
             
+            if let _ = result {
+                
+                // store in database
+                self.storeUserInFirebase()
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "logInSegue", sender: self)
+                }
+            }
+            
             print(result ?? "")
         }
-        
-        // store in database
-        storeUserInFirebase()
-        
-        // go to location view controller
-        self.performSegue(withIdentifier: "logInSegue", sender: self)
+
     }
     
     func storeUserInFirebase() {
@@ -117,9 +122,7 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
             // store in seperate node in firebase
             self.mailStorage = [uid!:email!]
             self.ref.child("email addresses").setValue(self.mailStorage)
-            
-            // go to location view controller
-//            self.performSegue(withIdentifier: "logInSegue", sender: self)
+
             
         })
 
