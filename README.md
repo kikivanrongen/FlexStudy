@@ -21,5 +21,7 @@ Student at the University of Amsterdam
   <img src=https://github.com/kikivanrongen/FlexStudy/blob/master/doc/Scherm5.png alt="scherm 5" width="170" height="290" />
 </p>
  
+## Link to video
+https://youtu.be/iNqFcxCZZPg
 
 <sup>Copyright © 2018, Kiki van Rongen. All rights reserved.</sup>
