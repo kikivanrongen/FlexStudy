@@ -42,16 +42,7 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
     
     // configure start UI
     func updateUI() {
-        
-//        // create camera position and mapview
-//        let camera = GMSCameraPosition.camera(withLatitude: 52.365766, longitude: 4.902576, zoom: 14)
-//        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
-//
-//        // set view
-//        mapView.isMyLocationEnabled = true
-//        mapView.delegate = self
-//        self.view = mapView
-        
+
         // create markers for all UBA locations
         for location in locations {
         
@@ -60,7 +51,6 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
             marker.title = location.name
             marker.snippet = location.address
             marker.icon = GMSMarker.markerImage(with: .blue)
-//            marker.map = mapView
             markers.append(marker)
             showMarkers(markers)
             
@@ -104,16 +94,13 @@ class LocationViewController: UIViewController, GMSMapViewDelegate {
         updateUI()
     }
     
+    // pass chosen location and locations list to next view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DetailSegue" {
             let detailViewController = segue.destination as! DetailViewController
             detailViewController.response = chosenLocation!
             detailViewController.locations = locations
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     // unwind from friends view controller

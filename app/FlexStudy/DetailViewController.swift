@@ -311,9 +311,4 @@ class DetailViewController: UIViewController {
         // uncomment this block the first time you are running this program
 //        storeLocationData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
 }

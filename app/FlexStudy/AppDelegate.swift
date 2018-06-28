@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  FlexStudy
-//
-//  Created by Kiki van Rongen on 04-06-18.
-//  Copyright © 2018 Kiki van Rongen. All rights reserved.
-//
-
 import UIKit
 import GoogleMaps
 import Firebase

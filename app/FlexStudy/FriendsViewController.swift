@@ -170,9 +170,4 @@ class FriendsViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         fetchUsers()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
 }

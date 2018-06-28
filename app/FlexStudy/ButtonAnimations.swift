@@ -3,9 +3,12 @@ import UIKit
 
 extension UIButton {
     
+    // pulse animation for buttons
     func pulsate() {
         
         let pulse = CASpringAnimation(keyPath: "transform.scale")
+        
+        // set properties
         pulse.duration = 0.6
         pulse.fromValue = 0.95
         pulse.toValue = 1
@@ -16,10 +19,4 @@ extension UIButton {
         
         layer.add(pulse, forKey: nil)
     }
-    
-    
-    
-    
-    
-    
 }

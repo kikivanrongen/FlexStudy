@@ -5,12 +5,17 @@ import FirebaseDatabase
 
 class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
  
+    // MARK: Variables
+    
     var ref: DatabaseReference!
     var mailStorage: [String:String] = [:]
+    
+    // MARK: Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // create database reference
         ref = Database.database().reference()
         
         // set background image
@@ -95,7 +100,6 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
                     self.performSegue(withIdentifier: "logInSegue", sender: self)
                 }
             }
-            
             print(result ?? "")
         }
 
@@ -132,9 +136,4 @@ class LogInViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBAction func unwindLogIn (_ sender: UIStoryboardSegue){
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
 }

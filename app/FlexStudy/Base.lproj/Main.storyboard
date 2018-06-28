@@ -37,8 +37,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="birds" translatesAutoresizingMaskIntoConstraints="NO" id="OJx-fp-Zr9">
-                                <rect key="frame" x="0.0" y="172" width="375" height="446"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="birds" translatesAutoresizingMaskIntoConstraints="NO" id="OJx-fp-Zr9">
+                                <rect key="frame" x="0.0" y="172" width="375" height="301"/>
                             </imageView>
                             <searchBar contentMode="redraw" placeholder="e-mail address..." translatesAutoresizingMaskIntoConstraints="NO" id="XSc-8o-IEW">
                                 <rect key="frame" x="0.0" y="116" width="375" height="56"/>
@@ -50,7 +50,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="a5x-AG-hna" firstAttribute="bottom" secondItem="OJx-fp-Zr9" secondAttribute="bottom" id="JxP-mM-cak"/>
+                            <constraint firstItem="OJx-fp-Zr9" firstAttribute="top" secondItem="XSc-8o-IEW" secondAttribute="bottom" id="11s-oR-pzz"/>
                             <constraint firstItem="XSc-8o-IEW" firstAttribute="leading" secondItem="a5x-AG-hna" secondAttribute="leading" id="Osl-hn-7Ge"/>
                             <constraint firstItem="OJx-fp-Zr9" firstAttribute="trailing" secondItem="a5x-AG-hna" secondAttribute="trailing" id="PHL-el-RAV"/>
                             <constraint firstItem="XSc-8o-IEW" firstAttribute="top" secondItem="a5x-AG-hna" secondAttribute="top" id="ZXX-Fk-mEl"/>

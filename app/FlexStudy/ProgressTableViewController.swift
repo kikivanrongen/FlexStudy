@@ -80,11 +80,12 @@ class ProgressTableViewController: UITableViewController {
         
     }
     
+    // look for activity key infirebase and remove item
     func removeItemFromDatabase(_ activity: Activity) {
 
         let key = activity.key
         
-        // remove item in firebase
+        // remove activity in firebase
         self.ref.child("users").child(uid!).child(key!).removeValue { (error, refer) in
             if error != nil {
                 print(error ?? "")
@@ -92,7 +93,6 @@ class ProgressTableViewController: UITableViewController {
                 print("child removed correctly")
             }
         }
-    
     }
     
     // MARK: Tableview functions
@@ -105,6 +105,7 @@ class ProgressTableViewController: UITableViewController {
         let activity = activities[indexPath.row]
         cell.dateLabel?.text = activity.date!
         
+        // set content
         if activity.duration! == " " {
             cell.durationLabel?.text = ""
         } else {
@@ -157,9 +158,4 @@ class ProgressTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
 }
