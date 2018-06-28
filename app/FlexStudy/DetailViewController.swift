@@ -133,8 +133,8 @@ class DetailViewController: UIViewController {
     // get current logged in user
     let uid = Auth.auth().currentUser!.uid
     
+    // create databse reference
     var ref: DatabaseReference! = Database.database().reference()
-//    var reference: DatabaseReference?
     
     // MARK: Functions
     
@@ -205,12 +205,10 @@ class DetailViewController: UIViewController {
         // view additional information for location if required
         if response.studentId == true {
             studentIdLabel.isHidden = false
-//            additionalInfoLabel.isHidden = false
         }
             
         else {
             studentIdLabel.isHidden = true
-//            additionalInfoLabel.isHidden = true
         }
         
         // set layout for buttons
@@ -292,7 +290,6 @@ class DetailViewController: UIViewController {
                         self.checkinButton.isEnabled = false
                         self.checkoutButton.isEnabled = true
                         self.checkinButton.setTitleColor(.lightGray, for: .normal)
-//                        self.checkinButton.layer.borderColor = UIColor.lightGray.cgColor
                         self.checkoutButton.setTitleColor(.black, for: .normal)
                         
                     } else {
@@ -300,7 +297,6 @@ class DetailViewController: UIViewController {
                         self.checkoutButton.isEnabled = false
                         self.checkinButton.setTitleColor(.black, for: .normal)
                         self.checkoutButton.setTitleColor(.lightGray, for: .normal)
-//                        self.checkoutButton.layer.borderColor = UIColor.lightGray.cgColor
                     }
                 }
             }

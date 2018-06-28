@@ -18,18 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="roeters" translatesAutoresizingMaskIntoConstraints="NO" id="H41-iS-N5V">
-                                <rect key="frame" x="0.0" y="-75" width="386" height="542"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="uva logo" translatesAutoresizingMaskIntoConstraints="NO" id="TNM-05-0Hg">
+                                <rect key="frame" x="16" y="567" width="343" height="100"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uva logo" translatesAutoresizingMaskIntoConstraints="NO" id="TNM-05-0Hg">
-                                <rect key="frame" x="16" y="467" width="343" height="200"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="roeters" translatesAutoresizingMaskIntoConstraints="NO" id="H41-iS-N5V">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="TNM-05-0Hg" secondAttribute="bottom" id="3LD-1f-Msc"/>
+                            <constraint firstItem="H41-iS-N5V" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="8c2-nc-smm"/>
                             <constraint firstAttribute="trailing" secondItem="TNM-05-0Hg" secondAttribute="trailing" constant="16" id="Ajh-8W-nkC"/>
-                            <constraint firstItem="TNM-05-0Hg" firstAttribute="top" secondItem="H41-iS-N5V" secondAttribute="bottom" id="geP-Jd-qp0"/>
+                            <constraint firstItem="H41-iS-N5V" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QNU-dr-6dF"/>
+                            <constraint firstItem="TNM-05-0Hg" firstAttribute="top" secondItem="H41-iS-N5V" secondAttribute="bottom" id="kvu-SJ-2Tv"/>
+                            <constraint firstItem="H41-iS-N5V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="otJ-iG-9fy"/>
                             <constraint firstItem="TNM-05-0Hg" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="16" id="wx1-lk-YEq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -41,7 +44,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="roeters" width="1120" height="542"/>
-        <image name="uva logo" width="700" height="200"/>
+        <image name="roeters" width="560" height="271"/>
+        <image name="uva logo" width="350" height="100"/>
     </resources>
 </document>

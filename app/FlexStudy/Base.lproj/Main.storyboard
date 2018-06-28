@@ -15,7 +15,7 @@
         <scene sceneID="ov3-fz-975">
             <objects>
                 <navigationController id="cf0-XQ-pwG" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Progressie" image="progress-25" id="upo-hg-Aau"/>
+                    <tabBarItem key="tabBarItem" title="Progressie" image="progress-50" id="upo-hg-Aau"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="il0-9a-kau">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -37,25 +37,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" ambiguous="YES" placeholder="e-mail address..." translatesAutoresizingMaskIntoConstraints="NO" id="XSc-8o-IEW">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="birds" translatesAutoresizingMaskIntoConstraints="NO" id="OJx-fp-Zr9">
+                                <rect key="frame" x="0.0" y="172" width="375" height="446"/>
+                            </imageView>
+                            <searchBar contentMode="redraw" placeholder="e-mail address..." translatesAutoresizingMaskIntoConstraints="NO" id="XSc-8o-IEW">
                                 <rect key="frame" x="0.0" y="116" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="6Bv-dL-qCh" id="cRI-5c-gyR"/>
                                 </connections>
                             </searchBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="birds" translatesAutoresizingMaskIntoConstraints="NO" id="OJx-fp-Zr9">
-                                <rect key="frame" x="0.0" y="172" width="375" height="446"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="XSc-8o-IEW" firstAttribute="top" secondItem="a5x-AG-hna" secondAttribute="top" id="IB5-Q3-4a9"/>
                             <constraint firstItem="a5x-AG-hna" firstAttribute="bottom" secondItem="OJx-fp-Zr9" secondAttribute="bottom" id="JxP-mM-cak"/>
                             <constraint firstItem="XSc-8o-IEW" firstAttribute="leading" secondItem="a5x-AG-hna" secondAttribute="leading" id="Osl-hn-7Ge"/>
                             <constraint firstItem="OJx-fp-Zr9" firstAttribute="trailing" secondItem="a5x-AG-hna" secondAttribute="trailing" id="PHL-el-RAV"/>
+                            <constraint firstItem="XSc-8o-IEW" firstAttribute="top" secondItem="a5x-AG-hna" secondAttribute="top" id="ZXX-Fk-mEl"/>
                             <constraint firstItem="OJx-fp-Zr9" firstAttribute="leading" secondItem="a5x-AG-hna" secondAttribute="leading" id="h83-xl-zfZ"/>
-                            <constraint firstItem="OJx-fp-Zr9" firstAttribute="top" secondItem="XSc-8o-IEW" secondAttribute="bottom" id="se9-T4-ACt"/>
                             <constraint firstItem="XSc-8o-IEW" firstAttribute="trailing" secondItem="a5x-AG-hna" secondAttribute="trailing" id="vYl-pc-pvo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="a5x-AG-hna"/>
@@ -156,7 +155,7 @@
         <scene sceneID="PGa-zV-cXj">
             <objects>
                 <navigationController id="7D8-uv-eSY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Locaties" image="location-25" id="Ncq-uN-R8V"/>
+                    <tabBarItem key="tabBarItem" title="Locaties" image="location-50" id="Ncq-uN-R8V"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="IIl-jG-CP5">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -199,8 +198,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="houses amsterdam" translatesAutoresizingMaskIntoConstraints="NO" id="wNb-xB-Ont">
-                                <rect key="frame" x="0.0" y="257" width="375" height="360"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="houses amsterdam" translatesAutoresizingMaskIntoConstraints="NO" id="wNb-xB-Ont">
+                                <rect key="frame" x="0.0" y="357" width="375" height="180"/>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xJ7-vh-Swf">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -357,7 +356,7 @@
                             <constraint firstItem="wNb-xB-Ont" firstAttribute="leading" secondItem="SQN-nq-tuW" secondAttribute="leading" id="gaT-DU-Yqj"/>
                             <constraint firstItem="WIi-ki-5gV" firstAttribute="bottom" secondItem="SQN-nq-tuW" secondAttribute="bottom" constant="-16" id="l2d-qK-JWa"/>
                             <constraint firstItem="SQN-nq-tuW" firstAttribute="trailing" secondItem="WIi-ki-5gV" secondAttribute="trailing" constant="16" id="oKK-mr-yB1"/>
-                            <constraint firstAttribute="bottom" secondItem="wNb-xB-Ont" secondAttribute="bottom" constant="50" id="qey-MQ-bu8"/>
+                            <constraint firstAttribute="bottom" secondItem="wNb-xB-Ont" secondAttribute="bottom" constant="130" id="qey-MQ-bu8"/>
                             <constraint firstItem="wNb-xB-Ont" firstAttribute="trailing" secondItem="SQN-nq-tuW" secondAttribute="trailing" id="uM9-39-DC5"/>
                             <constraint firstItem="SQN-nq-tuW" firstAttribute="trailing" secondItem="GmT-6f-SQ9" secondAttribute="trailing" constant="16" id="zEl-pe-iJi"/>
                         </constraints>
@@ -417,9 +416,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="birds" width="500" height="602"/>
-        <image name="houses amsterdam" width="564" height="360"/>
-        <image name="location-25" width="26" height="26"/>
-        <image name="progress-25" width="25" height="25"/>
+        <image name="birds" width="250" height="301"/>
+        <image name="houses amsterdam" width="282" height="180"/>
+        <image name="location-50" width="25" height="25"/>
+        <image name="progress-50" width="25" height="25"/>
     </resources>
 </document>

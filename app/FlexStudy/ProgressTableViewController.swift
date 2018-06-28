@@ -42,9 +42,8 @@ class ProgressTableViewController: UITableViewController {
         // observe events for added activity
         ref.child("users").child(uid).observe(.childAdded, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String:AnyObject] {
-                print("---- ACTIVITIES ADDED ----")
-                print(dictionary)
 
+                // create new activity object for each fetched activity and store in list
                 let newActivity = Activity(location: dictionary["location"] as? String, starttime: dictionary["starttime"] as? Date, duration: dictionary["duration"] as? String, date: dictionary["date"] as? String, key: dictionary["key"] as? String)
                 self.activities.append(newActivity)
 
@@ -52,24 +51,9 @@ class ProgressTableViewController: UITableViewController {
             }
         }, withCancel: nil)
         
-        // observe events for removed activity // NIET NODIG --> JE DOET NIKS MET DE REMOVED ACTIVITY
-//        ref.child("users").child(uid).observe(.childRemoved, with: { (snapshot) in
-//            if let dictionary = snapshot.value as? [String:AnyObject] {
-//                print("---- ACTIVITIES REMOVED ----")
-//                print(dictionary)
-//                let removedActivity = Activity(location: dictionary["location"] as? String, starttime: dictionary["starttime"] as? Date, duration: dictionary["duration"] as? String, date: dictionary["date"] as? String, key: dictionary["key"] as? String)
-////                self.removeItemFromDatabase(removedActivity) // is al gebeurd hier ....
-//
-//                self.tableView.reloadData()
-//            }
-//        },withCancel: nil)
-        
         // observe events for changed activity
         ref.child("users").child(uid).observe(.childChanged, with: { (snapshot) in
             if let dictionary = snapshot.value as? [String:AnyObject] {
-                
-                print("---- ACTIVITIES CHANGED --> ADD TO TABLE VIEW ----")
-                print(dictionary)
                 
                 // iterate over activities
                 var index = 0
@@ -162,6 +146,7 @@ class ProgressTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // fetch user activities and update user interface when loaded
     override func viewDidLoad() {
         fetchActivityData()
         updateUI()
